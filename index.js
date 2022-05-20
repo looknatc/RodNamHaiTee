@@ -54,7 +54,7 @@ async function getDataFromDate(){
     var ret = {};
     querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
-        console.log("print",doc.id, " => ", doc.data());
+        console.log("print  ",doc.id, " => ", doc.data());
         ret[doc.id] = doc.data();
     });
     // var s = questions_ref.where('subject', '==', subjname).get()
