@@ -34,7 +34,7 @@ import {
 } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js';
 
 const db = getFirestore();
-const data_ref = collection(db, 'RodNam');
+const data_ref = collection(db, "Naotest8");
 
 
 //getdata section
@@ -46,19 +46,66 @@ const data_ref = collection(db, 'RodNam');
 //     return timestamp ;// ex. 1631246400
 // }
 
-async function getDataFromDate(){
+async function getAllData(){
     // var dateTime = getStartOfToday();
-    var dateTime = 0;
-    var s =  query(data_ref, where("temperature", ">=", dateTime));
-    const querySnapshot = await getDocs(s);
-    var ret = {};
+    // var dateTime = 0;
+    // var s =  query(data_ref, where("temperature", ">=", dateTime));
+    const querySnapshot = await getDocs(data_ref);
+    var ret = [];
     querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
-        console.log("print  ",doc.id, " => ", doc.data());
-        ret[doc.id] = doc.data();
+        //console.log("print  ",doc.id, " => ", doc.data());
+        ret.push(doc.data());
     });
     // var s = questions_ref.where('subject', '==', subjname).get()
     return ret;
 }
 
-window.getDataFromDate = getDataFromDate;
+async function getAllDataByDate(days=0){
+    var ret = [];
+    var data = await getAllData();
+    var start = moment().subtract(days+1, 'days');
+    var stop = moment().add(1, 'days');
+    for(var i =0;i<data.length;i++){
+        var t = moment(data[i].time.seconds*1000);
+        if(t.isBefore(stop) && t.isAfter(start)){
+            ret.push(data[i]);
+        }
+    }
+    return ret;
+}
+
+async function getTemperature(){
+    var s =  query(data_ref, where("subject", "==", subjname));
+    const querySnapshot = await getDocs(s);
+    var ret = {};
+    querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log("getallquestion",doc.id, " => ", doc.data());
+        ret[doc.id] = doc.data();
+    });
+    // var s = questions_ref.where('subject', '==', subjname).get()
+    return ret;
+    
+}
+
+async function getHumidity(){
+    const docRef = doc(db, "NaoTest5", id);
+    
+}
+
+async function getSoilHumidity(){
+    const docRef = doc(db, "NaoTest5", id);
+    
+}
+async function getLight(){
+    const docRef = doc(db, "NaoTest5", id);
+    
+}
+
+window.getAllData = getAllData;
+window.getTemperature = getTemperature;
+window.getHumidity = getHumidity;
+window.getSoilHumidity = getSoilHumidity;
+window.getLight = getLight;
+window.getAllDataByDate = getAllDataByDate;
