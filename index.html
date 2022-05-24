@@ -5,10 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rod Nam Hai Tee</title>
     <link rel="stylesheet" href="style.css" />
+    
+    <!-- jquery  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- bootstrap  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0-beta1/css/bootstrap-grid.min.css" integrity="sha512-QWjMsIpO5eW4+c4ASTEaZ4+eZNZ4YTtSDiu167Rq1Eqw//WlO+rXo4OvZMpyW/ykbN5LFeXmN6N416OzmWo7fA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- angular js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js" integrity="sha512-KZmyTq3PLx9EZl0RHShHQuXtrvdJ+m35tuOiwlcZfs/rE7NZv29ygNA8SFCkMXTnYZQK2OX0Gm2qKGfvWEtRXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- moment js -->
     <script src="https://cdn.jsdelivr.net/npm/moment@2.29.3/moment.min.js"></script>    
+    <!-- chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!--https://github.com/toorshia/justgage-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.4/raphael-min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/justgage/1.2.9/justgage.min.js"></script>
+    <!-- line chart -->
+    <!-- <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-base.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
   </head>
   <body ng-controller="myControl">
     <!-- Header -->
@@ -49,6 +65,7 @@
         </div>
         <div class="temperature">
           <div class="montserrat-normal-black-32px">Temperature</div>
+          <div ><canvas id="myChart" width="300" height="200"></canvas></div>
           <!-- <img
             class="image-2"
             src="https://anima-uploads.s3.amazonaws.com/projects/627a3db91996a722f08bb46f/releases/627a3dc415efe47701a15528/img/image-2@2x.png"
@@ -56,6 +73,7 @@
         </div>
         <div class="temperature">
           <div class="montserrat-normal-black-32px">soil-moisture</div>
+          <div id="gauge"></div>
           <!-- <img
             class="image-2"
             src="https://anima-uploads.s3.amazonaws.com/projects/627a3db91996a722f08bb46f/releases/627a3dc415efe47701a15528/img/image-2@2x.png"
@@ -93,14 +111,17 @@
         Temperature = <span>{{temperature}}</span>
         Humidity = <span>{{humidity}}%</span>
       </div>
+      <div id="container"></div>
     </div>
     <script type="module" src ="index.js"></script>
+
     <script>
 angular.module('myApp', [])
 .controller('myControl', function($scope) {
     $scope.temperature = "";
     $scope.humidity = "";
     $scope.light = "";
+    $scope.soilHumidity = "";
     $scope.changeTenp = function(dir){
       if(dir == "up"){
         $scope.temperature += 1.0;
@@ -115,16 +136,147 @@ angular.module('myApp', [])
         }
         console.log("save",obj);
     }
+    $scope.round = function(num){
+        return Math.round((num + Number.EPSILON) * 100) / 100
+    }
+    
+    $scope.hourData = function(data){
+        var ret = [];
+        for(var i=0;i<24;i++){
+            ret.push({
+              label: i,
+              humidity: 0,
+              temperature: 0,
+              light: 0,
+              soilHumidity:0,
+              count: 0,
+            });
+        }
+        for(var i=0;i<data.length;i++){
+            var d = data[i];
+            var local = moment.utc(d.time.seconds*1000).local();
+            var hour = local.hour();
+            var prev = {... ret[hour]};
+            var avg = {
+              label: prev.label,
+              humidity:$scope.round( (d.humidity + (prev.humidity * prev.count))/(prev.count + 1)),
+              temperature:$scope.round( (d.temperature + (prev.temperature * prev.count))/(prev.count + 1)),
+              light:$scope.round( (d.light + (prev.light * prev.count))/(prev.count + 1)),
+              soilHumidity:$scope.round( (d.soilHumidity + (prev.soilHumidity * prev.count))/(prev.count + 1)),
+              count: prev.count + 1,
+            }
+            ret[hour] = avg;
+            console.log(local.format(),local.format("HH"));
+        }
+        console.log(ret);
+        return ret;
+    }
+    
     $scope.loadData = async function(){
         var ret = await getAllDataByDate();
+        ret = ret.sort(function(x, y){
+            return x.time.seconds - y.time.seconds;
+        })
+      
+        // for(var i =0;i<ret.length;i++){
+        //     console.log(moment(ret[i].time.seconds*1000).format('LLL'))
+        // }
+        // data = [];
+        // for(var i =0;i<ret.length;i++){
+        //   data.push([ret[i].time.seconds*1000,ret[i].temperature]);
+        //     // console.log(moment(ret[i].time.seconds*1000).format('LLL'))
+        // }
+        var hourData = $scope.hourData(ret);
+
+        //         // create a data set on our data
+        // var dataSet = anychart.data.set(data);
+
+        // // map data for the line chart,
+        // // take x from the zero column and value from the first column
+        // var seriesData = dataSet.mapAs({ x: 0, value: 1 });
+
+        // // create a line chart
+        // var chart = anychart.line();
+
+        // var lineChart = chart.line(seriesData);
+
+        // // set the container id for the line chart
+        // chart.container('container');
+
+        // // draw the line chart
+        // chart.draw();
+
+        
+        // console.log(ret);
         $scope.$apply(function () {
             var last = ret[ret.length -1];
             console.log("loadData",last);
             $scope.temperature = last.temperature;
             $scope.humidity = last.humidity;
             $scope.light = last.light;
+            $scope.soilHumidity = last.soilHumidity;
+            $scope.gauge.refresh($scope.soilHumidity/100);
+            $scope.createChart(hourData);
         });
     }
+    $scope.createChart = function(data){
+      var labels = [];
+      var temperature = [];
+      var soilHumidity = [];
+      var light = [];
+      for(var i=0;i<data.length;i++){
+          labels.push(data[i].label);
+          temperature.push(data[i].temperature);
+          soilHumidity.push(data[i].soilHumidity/100);
+          light.push(data[i].light);
+      }
+      console.log(temperature,labels);
+      const ctx = document.getElementById('myChart').getContext('2d');
+      const myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+          labels: labels,
+          datasets: [
+            {
+              label: 'Temperature',
+              data: temperature,
+              borderColor: 'black',
+              backgroundColor: 'black',
+              borderWidth: 1,
+            },
+            {
+              label: 'soilHumidity',
+              data: soilHumidity,
+              borderColor: 'blue',
+              backgroundColor: 'blue',
+              borderWidth: 1,
+            },
+            {
+              label: 'light',
+              data: light,
+              borderColor: 'yellow',
+              backgroundColor: 'yellow',
+              borderWidth: 1,
+            }
+          ]
+      },
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: false,
+              }
+          }
+      }
+      });      
+    }
+    $scope.gauge = new JustGage({
+        id: "gauge", // the id of the html element
+        value: 0,
+        min: 0,
+        max: 100,
+        decimals: 2,
+        gaugeWidthScale: 0.6
+    });
 
     $scope.loadData();
 
