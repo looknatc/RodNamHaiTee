@@ -34,7 +34,7 @@ import {
 } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js';
 
 const db = getFirestore();
-const data_ref = collection(db, "Naotest8");
+const data_ref = collection(db, "Naotest9");
 
 
 //getdata section

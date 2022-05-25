@@ -61,7 +61,7 @@
 
     <div class="collected-data" id="data-section">
         <h1>Collected Data</h1>
-        <hr>
+        <hr style="width: 50%;">
 
         <div class="sensor-data">
 
@@ -95,7 +95,7 @@
 
           <div class="data soil-moisture">
             <div class="montserrat-normal-black-32px">Soil-moisture</div>
-            <div id="gauge"></div>
+            <div class="gauge" id="gauge"></div>
             
           </div>
 
@@ -107,7 +107,7 @@
       <div class="overlap-group1">
 
         <h1>Watering</h1>
-        <hr>
+        <hr style="width: 50%;">
       
           <div class="overlap-group8">
 
@@ -139,12 +139,9 @@
         <p>Produced by เราจะรอดไปด้วยกัน</p>
       </div>
       
-    </div>
+    </div>      
 
-
-      
-
-      <div id="container"></div>
+    <div id="container"></div>
     
 
 
@@ -278,21 +275,7 @@ angular.module('myApp', [])
               label: 'Temperature',
               data: temperature,
               borderColor: 'black',
-              backgroundColor: 'black',
-              borderWidth: 1,
-            },
-            {
-              label: 'soilHumidity',
-              data: soilHumidity,
-              borderColor: 'blue',
-              backgroundColor: 'blue',
-              borderWidth: 1,
-            },
-            {
-              label: 'light',
-              data: light,
-              borderColor: 'yellow',
-              backgroundColor: 'yellow',
+              backgroundColor: 'white',
               borderWidth: 1,
             }
           ]
@@ -312,7 +295,10 @@ angular.module('myApp', [])
         min: 0,
         max: 100,
         decimals: 2,
-        gaugeWidthScale: 0.6
+        gaugeWidthScale: 0.6,
+        dialStartAngle: 180,
+        dialEndAngle: 0,
+        labelFontColor: 'black',
     });
 
     $scope.loadData();
