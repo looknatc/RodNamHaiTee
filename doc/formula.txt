@@ -1,0 +1,13 @@
+ิ่อ่านค่าทุกๆ 15 นาที
+temp //อุณหภูมิ 
+x //ค่าความชื้นในดิน
+if (x<1500) x=1500;
+if (x>3500) x=3500;
+moisture = 3500-x/20  1500//ความชื้น
+if (moisture < 40) {
+    doIt();
+}
+else if (temp>maxvalue || moisture < 60)
+{
+    doIt();
+}
