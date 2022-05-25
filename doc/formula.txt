@@ -3,11 +3,11 @@ temp //อุณหภูมิ
 x //ค่าความชื้นในดิน
 if (x<1500) x=1500;
 if (x>3500) x=3500;
-้ี้huminity = 3500-x/20  1500//ความชื้น
-if (huminity < 40) {
+moisture = 3500-x/20  1500//ความชื้น
+if (moisture < 40) {
     doIt();
 }
-else if (temp>maxvalue || huminity < 60)
+else if (temp>maxvalue || moisture < 60)
 {
     doIt();
 }
