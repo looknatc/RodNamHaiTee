@@ -26,43 +26,36 @@
 
 
   </head>
+
+
   <body ng-controller="myControl">
     <!-- Header -->
     <div class="header">
+
       <img src="assets/images/header-background.png" style="width: 100%" />
-      <div class="menu_bar">
-        <ul>
-          <li><a href="">Home</a></li>
-          <li><a href="">Data</a></li>
-          <li><a href="">Water</a></li>
-          <li><a href="">About us</a></li>
-          <li><a href="">+</a></li>
-        </ul>
-      </div>
-      <div class="text_block">
-        <h1 class="title">Rod Nam Hai Tee</h1>
-        <p class="description">
-          Automated plant watering system is programmed using Arduino IDE
-          software. Arduino microcontroller checks soil moisture level, if low,
-          triggering a water pump on until sensor reaches threshold. After this,
-          the system will re-check the soil moisture between periodic intervals
-          to see if you need more water.
-        </p>
-      </div>
-      <div class="collected-data montserrat-bold-black-48px">Collected Data</div>
-      <div class="sensor-data">
-        <div class="light">
-          <div class=" montserrat-normal-black-32px">Light</div>
-          <h1 class="percent">{{light}}%</h1>
-          <!-- <img
-            class="image-3"
-            src="https://anima-uploads.s3.amazonaws.com/projects/627a3db91996a722f08bb46f/releases/627a3dc415efe47701a15528/img/image-3@2x.png"
-          /> -->
+
+        <div class="menu_bar">
+          <ul>
+            <li><a href="">Home</a></li>
+            <li><a href="#data-section">Data</a></li>
+            <li><a href="#water-section">Water</a></li>
+            <li><a href="#about-section">About us</a></li>
+            <li><a href="">+</a></li>
+          </ul>
         </div>
-        <div class="temperature">
-          <div class=" montserrat-normal-black-32px">Moisture</div>
-          <h1 class="percent">{{humidity}}%</h1>
+
+
+        <div class="text_block">
+          <h1 class="title">Rod Nam Hai Tee</h1>
+          <p class="description">
+            Automated plant watering system is programmed using Arduino IDE
+            software. Arduino microcontroller checks soil moisture level, if low,
+            triggering a water pump on until sensor reaches threshold. After this,
+            the system will re-check the soil moisture between periodic intervals
+            to see if you need more water.
+          </p>
         </div>
+<<<<<<< HEAD
         <div class="temperature">
           <div class="montserrat-normal-black-32px">Temperature</div>
           <div ><canvas id="myChart" width="300" height="200"></canvas></div>
@@ -123,10 +116,103 @@
         Humidity = <span>{{humidity}}%</span>
       </div>
       <!-- <div id="container"></div> -->
+=======
+
+>>>>>>> 773c42678d63b5952cd75ecaf2d5fd68cd2a9a6d
     </div>
+
+
+    <div class="collected-data" id="data-section">
+        <h1>Collected Data</h1>
+        <hr style="width: 50%;">
+
+        <div class="sensor-data">
+
+          <!--
+
+          <div class="light">
+            <div class=" montserrat-normal-black-32px">Light</div>
+            <h1 class="percent">{{light}}%</h1>
+            <img
+              class="image-3"
+              src="https://anima-uploads.s3.amazonaws.com/projects/627a3db91996a722f08bb46f/releases/627a3dc415efe47701a15528/img/image-3@2x.png"
+              />
+          </div>
+
+        -->
+
+          <div class="data moisture">
+            <div class="montserrat-normal-black-32px">Moisture</div>
+            <h1 class="percent">{{humidity}}%</h1>
+          </div>
+
+          <div class="data temperature">
+            <div class="montserrat-normal-black-32px">Temperature</div>
+            <div ><canvas id="myChart" width="300" height="200"></canvas></div>
+            <!-- <img
+              class="image-2"
+              src="https://anima-uploads.s3.amazonaws.com/projects/627a3db91996a722f08bb46f/releases/627a3dc415efe47701a15528/img/image-2@2x.png"
+            /> -->
+          </div>
+
+
+          <div class="data soil-moisture">
+            <div class="montserrat-normal-black-32px">Soil-moisture</div>
+            <div class="gauge" id="gauge"></div>
+            
+          </div>
+
+        </div>
+    </div>
+
+    <div class="watering-section" id="water-section">
+      <br>
+      <div class="overlap-group1">
+
+        <h1>Watering</h1>
+        <hr style="width: 50%;">
+      
+          <div class="overlap-group8">
+
+            <div class="place-1 date-data">
+              <h2>Date</h2>
+              <!-- Add Date-->
+              <div class="text-2">
+                29/4/2022&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 10:00:00
+              </div>
+
+            </div>
+
+            <div class="overlap-group7 date-data">
+              <h2>Total Amount</h2>
+              <div class="number">10</div>
+            </div>
+            
+
+          </div>
+
+
+      </div>
+    </div>
+
+    <div class="about-section">
+      <div class="about">
+        <h1>About us</h1>
+        <hr>
+        <p>Produced by เราจะรอดไปด้วยกัน</p>
+      </div>
+      
+    </div>      
+
+    <div id="container"></div>
+    
+
+
     <script type="module" src ="index.js"></script>
 
-    <script>
+
+
+<script>
 angular.module('myApp', [])
 .controller('myControl', function($scope) {
     $scope.temperature = "";
@@ -236,21 +322,7 @@ angular.module('myApp', [])
               label: 'Temperature',
               data: temperature,
               borderColor: 'black',
-              backgroundColor: 'black',
-              borderWidth: 1,
-            },
-            {
-              label: 'soilHumidity',
-              data: soilHumidity,
-              borderColor: 'blue',
-              backgroundColor: 'blue',
-              borderWidth: 1,
-            },
-            {
-              label: 'light',
-              data: light,
-              borderColor: 'yellow',
-              backgroundColor: 'yellow',
+              backgroundColor: 'white',
               borderWidth: 1,
             }
           ]
@@ -270,7 +342,10 @@ angular.module('myApp', [])
         min: 0,
         max: 100,
         decimals: 2,
-        gaugeWidthScale: 0.6
+        gaugeWidthScale: 0.6,
+        dialStartAngle: 180,
+        dialEndAngle: 0,
+        labelFontColor: 'black',
     });
 
     $scope.loadData();
