@@ -89,12 +89,23 @@
         <div class="overlap-group-container-1">
           <div class="overlap-group8">
             <div class="place-1 montserrat-normal-black-32px">Date</div>
-            <div class="text-1 montserrat-normal-black-32px">
+            <!-- <div class="text-1 montserrat-normal-black-32px">
               29/4/2022&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 10:00:00
             </div>
             <div class="text-2 montserrat-normal-black-32px">
               29/4/2022&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 10:00:00
-            </div>
+            </div> -->
+            <table>
+              <tr>
+                <th>Date</th>
+                <th>Time</th>  
+              </tr>
+              <tr ng-repeat="item in waterData">
+                <td>{{moment(item.time.seconds*1000).format('ll')}}</td>
+                <td>{{moment(item.time.seconds*1000).format('LT')}}</td>  
+              </tr>
+            </table>
+            
           </div>
           <div class="overlap-group7">
             <div class="total-amount montserrat-normal-black-32px">Total Amount</div>
@@ -111,7 +122,7 @@
         Temperature = <span>{{temperature}}</span>
         Humidity = <span>{{humidity}}%</span>
       </div>
-      <div id="container"></div>
+      <!-- <div id="container"></div> -->
     </div>
     <script type="module" src ="index.js"></script>
 
@@ -173,41 +184,14 @@ angular.module('myApp', [])
     }
     
     $scope.loadData = async function(){
-        var ret = await getAllDataByDate();
+        var ret = await getAllDataByDate(2);
         ret = ret.sort(function(x, y){
             return x.time.seconds - y.time.seconds;
         })
+        console.log("ret",ret);
       
-        // for(var i =0;i<ret.length;i++){
-        //     console.log(moment(ret[i].time.seconds*1000).format('LLL'))
-        // }
-        // data = [];
-        // for(var i =0;i<ret.length;i++){
-        //   data.push([ret[i].time.seconds*1000,ret[i].temperature]);
-        //     // console.log(moment(ret[i].time.seconds*1000).format('LLL'))
-        // }
         var hourData = $scope.hourData(ret);
 
-        //         // create a data set on our data
-        // var dataSet = anychart.data.set(data);
-
-        // // map data for the line chart,
-        // // take x from the zero column and value from the first column
-        // var seriesData = dataSet.mapAs({ x: 0, value: 1 });
-
-        // // create a line chart
-        // var chart = anychart.line();
-
-        // var lineChart = chart.line(seriesData);
-
-        // // set the container id for the line chart
-        // chart.container('container');
-
-        // // draw the line chart
-        // chart.draw();
-
-        
-        // console.log(ret);
         $scope.$apply(function () {
             var last = ret[ret.length -1];
             console.log("loadData",last);
@@ -217,6 +201,17 @@ angular.module('myApp', [])
             $scope.soilHumidity = last.soilHumidity;
             $scope.gauge.refresh($scope.soilHumidity/100);
             $scope.createChart(hourData);
+        });
+    }
+    $scope.moment = moment;
+    $scope.loadWaterData = async function(){
+        var ret = await getAllWaterDataByDate();
+        ret.sort(function(a, b){
+          return a.time.seconds - b.time.seconds;
+        });        
+        console.log("loadWaterData",ret);
+        $scope.$apply(function () {
+          $scope.waterData = ret;
         });
     }
     $scope.createChart = function(data){
@@ -279,6 +274,7 @@ angular.module('myApp', [])
     });
 
     $scope.loadData();
+    $scope.loadWaterData();
 
 });      
     </script>
