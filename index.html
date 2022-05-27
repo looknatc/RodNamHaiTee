@@ -41,6 +41,7 @@
             <li><a href="#water-section">Water</a></li>
             <li><a href="#about-section">About us</a></li>
             <li><a href="">+</a></li>
+            
           </ul>
         </div>
 
@@ -148,10 +149,11 @@
         <p>Produced by เราจะรอดไปด้วยกัน</p>
       </div>
       
-    </div>      
+    </div>  
+    <button>click</button> 
+    
 
-    <div id="container"></div>
-    <button>click</button>
+    
     
 
 
@@ -239,6 +241,7 @@ angular.module('myApp', [])
           }
         }
         ret = clean;
+        console.log("cleandata",ret);
       
         var hourData = $scope.hourData(ret);
 
@@ -246,16 +249,16 @@ angular.module('myApp', [])
             var last = ret[ret.length -1];
             console.log("loadData",last);
             $scope.temperature = last.temperature;
-            $scope.humidity = last.humidity;
+            $scope.humidity = $scope.round(last.humidity);
             $scope.light = last.light;
             $scope.soilHumidity = last.soilHumidity;
-            $scope.gauge.refresh($scope.soilHumidity/100);
+            $scope.gauge.refresh($scope.soilHumidity);
             $scope.createChart(hourData);
         });
     }
     $scope.moment = moment;
     $scope.loadWaterData = async function(){
-        var ret = await getAllWaterDataByDate();
+        var ret = await getAllWaterDataByDate("Naotest8",moment().format("YYYY-M-D"));
         console.log("loadWaterData",ret);
         $scope.$apply(function () {
           $scope.waterData = ret;
@@ -283,7 +286,7 @@ angular.module('myApp', [])
           // light.push(data[i].light);
           $scope.pushIfValid(data[i].temperature,temperature);
           $scope.pushIfValid(data[i].humidity,humidity);
-          $scope.pushIfValid(data[i].soilHumidity/100,soilHumidity);
+          $scope.pushIfValid(data[i].soilHumidity,soilHumidity);
           $scope.pushIfValid(data[i].light,light);
       }
       console.log(temperature,labels);
@@ -303,8 +306,8 @@ angular.module('myApp', [])
             {
               label: 'soilHumidity',
               data: soilHumidity,
-              borderColor: 'blue',
-              backgroundColor: 'blue',
+              borderColor: 'brown',
+              backgroundColor: 'brown',
               borderWidth: 1,
             },
             {
@@ -332,10 +335,14 @@ angular.module('myApp', [])
         min: 0,
         max: 100,
         decimals: 2,
+        color : "#fff000",
         gaugeWidthScale: 0.6,
         dialStartAngle: 180,
         dialEndAngle: 0,
         labelFontColor: 'black',
+        // customSectors : [{"lo":0,"hi":10,"color":"#a9d70b"},
+        //            {"lo":11,"hi":22,"color":"#f9c802"},
+        //            {"lo":23,"hi":34,"color":"#ff0000"}],
     });
 
     $scope.loadData();

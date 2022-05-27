@@ -73,7 +73,7 @@ async function getAllData(id = "Naotest8", date = "2022-5-26"){
         ret.push({
             id:d[0],
             humidity:parseFloat(d[1]),
-            soilHumidity:parseFloat(d[2]),
+            soilHumidity: (4000 - parseFloat(d[2]))/3000*100,
             temperature:parseFloat(d[3]),
             light:parseFloat(d[4]),
             watering:d[5],
@@ -93,9 +93,9 @@ async function getAllData(id = "Naotest8", date = "2022-5-26"){
 }
 // await getAllData();
 
-async function getAllWaterDataByDate(){
+async function getAllWaterDataByDate(id = "Naotest8", date = "2022-5-26"){
     // var ret = [];
-    var data = await getAllData();
+    var data = await getAllData(id,date);
     // var start = moment().subtract(days+1, 'days');
     // var stop = moment().add(1, 'days');
     // for(var i =0;i<data.length;i++){
