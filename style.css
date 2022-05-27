@@ -58,6 +58,9 @@ body{
     padding-right: 20px;
     font-size: 24px;
 }
+.water-data > td {
+    font-family: 'ui-monospace';
+}
 .sensor-data {
     display: flex;
     font-size: 36px;
@@ -364,4 +367,3 @@ body{
 
 
 }
-

@@ -46,7 +46,7 @@ const water_ref = collection(db, "Water");
 //     return timestamp ;// ex. 1631246400
 // }
 
-async function getAllData(_data_ref){
+async function getAllData_FB(_data_ref){
     // var dateTime = getStartOfToday();
     // var dateTime = 0;
     // var s =  query(data_ref, where("temperature", ">=", dateTime));
@@ -60,9 +60,61 @@ async function getAllData(_data_ref){
     // var s = questions_ref.where('subject', '==', subjname).get()
     return ret;
 }
+async function getAllData(id = "Naotest8", date = "2022-5-26"){
+    // var dateTime = getStartOfToday();
+    // var dateTime = 0;
+    // var s =  query(data_ref, where("temperature", ">=", dateTime));
+    var tmp = await $.getJSON(`https://iz1mjkeoql.execute-api.us-west-1.amazonaws.com/stage/getData?id=${id}&from=${date}`);
+    // tmp = tmp.result;
+    var ret = [];
+    for(var i = 0;i< tmp.result.length;i++){
+        var d = tmp.result[i].data;
+        // deviceID, Humidity, SoilHumidity, Temperature, light, relayRunning
+        ret.push({
+            id:d[0],
+            humidity:parseFloat(d[1]),
+            soilHumidity:parseFloat(d[2]),
+            temperature:parseFloat(d[3]),
+            light:parseFloat(d[4]),
+            watering:d[5],
+            time:tmp.result[i].createTime,
+
+        });
+    }
+    // const querySnapshot = await getDocs(_data_ref);
+    // var ret = [];
+    // querySnapshot.forEach((doc) => {
+    //     // doc.data() is never undefined for query doc snapshots
+    //     //console.log("print  ",doc.id, " => ", doc.data());
+    //     ret.push(doc.data());
+    // });
+    // var s = questions_ref.where('subject', '==', subjname).get()
+    return ret;
+}
 // await getAllData();
 
-async function getAllWaterDataByDate(days=1){
+async function getAllWaterDataByDate(){
+    // var ret = [];
+    var data = await getAllData();
+    // var start = moment().subtract(days+1, 'days');
+    // var stop = moment().add(1, 'days');
+    // for(var i =0;i<data.length;i++){
+    //     var t = moment(data[i].time.seconds*1000);
+    //     if(t.isBefore(stop) && t.isAfter(start)){
+    //         ret.push(data[i]);
+    //     }
+    // }
+    var ret = [];
+    for(var i = 0;i< data.length;i++){
+        var d = data[i];
+        if(d.watering>0){
+            ret.push(d);
+        }
+    }
+    return ret;
+}
+
+async function getAllWaterDataByDate_FB(days=1){
     var ret = [];
     var data = await getAllData(water_ref);
     var start = moment().subtract(days+1, 'days');
@@ -76,7 +128,7 @@ async function getAllWaterDataByDate(days=1){
     return ret;
 }
 
-async function getAllDataByDate(days=1){
+async function getAllDataByDate_FB(days=1){
     var ret = [];
     var data = await getAllData(data_ref);
     var start = moment().subtract(days+1, 'days');
@@ -90,39 +142,38 @@ async function getAllDataByDate(days=1){
     return ret;
 }
 
-async function getTemperature(){
-    var s =  query(data_ref, where("subject", "==", subjname));
-    const querySnapshot = await getDocs(s);
-    var ret = {};
-    querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        console.log("getallquestion",doc.id, " => ", doc.data());
-        ret[doc.id] = doc.data();
-    });
-    // var s = questions_ref.where('subject', '==', subjname).get()
-    return ret;
+// async function getTemperature(){
+//     var s =  query(data_ref, where("subject", "==", subjname));
+//     const querySnapshot = await getDocs(s);
+//     var ret = {};
+//     querySnapshot.forEach((doc) => {
+//         // doc.data() is never undefined for query doc snapshots
+//         console.log("getallquestion",doc.id, " => ", doc.data());
+//         ret[doc.id] = doc.data();
+//     });
+//     // var s = questions_ref.where('subject', '==', subjname).get()
+//     return ret;
     
-}
+// }
 
-async function getHumidity(){
-    const docRef = doc(db, "NaoTest5", id);
+// async function getHumidity(){
+//     const docRef = doc(db, "NaoTest5", id);
     
-}
+// }
 
-async function getSoilHumidity(){
-    const docRef = doc(db, "NaoTest5", id);
+// async function getSoilHumidity(){
+//     const docRef = doc(db, "NaoTest5", id);
     
-}
-async function getLight(){
-    const docRef = doc(db, "NaoTest5", id);
+// }
+// async function getLight(){
+//     const docRef = doc(db, "NaoTest5", id);
     
-}
+// }
 
 window.getAllData = getAllData;
-window.getTemperature = getTemperature;
-window.getHumidity = getHumidity;
-window.getSoilHumidity = getSoilHumidity;
-window.getLight = getLight;
-window.getAllDataByDate = getAllDataByDate;
+// window.getTemperature = getTemperature;
+// window.getHumidity = getHumidity;
+// window.getSoilHumidity = getSoilHumidity;
+// window.getLight = getLight;
+// window.getAllDataByDate = getAllDataByDate;
 window.getAllWaterDataByDate = getAllWaterDataByDate;
-getAllWaterDataByDate

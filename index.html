@@ -55,70 +55,6 @@
             to see if you need more water.
           </p>
         </div>
-<<<<<<< HEAD
-        <div class="temperature">
-          <div class="montserrat-normal-black-32px">Temperature</div>
-          <div ><canvas id="myChart" width="300" height="200"></canvas></div>
-          <!-- <img
-            class="image-2"
-            src="https://anima-uploads.s3.amazonaws.com/projects/627a3db91996a722f08bb46f/releases/627a3dc415efe47701a15528/img/image-2@2x.png"
-          /> -->
-        </div>
-        <div class="temperature">
-          <div class="montserrat-normal-black-32px">soil-moisture</div>
-          <div id="gauge"></div>
-          <!-- <img
-            class="image-2"
-            src="https://anima-uploads.s3.amazonaws.com/projects/627a3db91996a722f08bb46f/releases/627a3dc415efe47701a15528/img/image-2@2x.png"
-          /> -->
-        </div>
-      </div>
-      <div class="overlap-group1">
-        <div class="watering montserrat-bold-black-48px">Watering</div>
-        <img
-          class="line-3"
-          src="https://anima-uploads.s3.amazonaws.com/projects/627a3db91996a722f08bb46f/releases/627a3dc415efe47701a15528/img/line-2@1x.svg"
-        />
-        <div class="overlap-group-container-1">
-          <div class="overlap-group8">
-            <div class="place-1 montserrat-normal-black-32px">Date</div>
-            <!-- <div class="text-1 montserrat-normal-black-32px">
-              29/4/2022&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 10:00:00
-            </div>
-            <div class="text-2 montserrat-normal-black-32px">
-              29/4/2022&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 10:00:00
-            </div> -->
-            <table>
-              <tr>
-                <th>Date</th>
-                <th>Time</th>  
-              </tr>
-              <tr ng-repeat="item in waterData">
-                <td>{{moment(item.time.seconds*1000).format('ll')}}</td>
-                <td>{{moment(item.time.seconds*1000).format('LT')}}</td>  
-              </tr>
-            </table>
-            
-          </div>
-          <div class="overlap-group7">
-            <div class="total-amount montserrat-normal-black-32px">Total Amount</div>
-            <div class="number">10</div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <button ng-click="changeTenp('up')">Temp Up</button><button ng-click="changeTenp('down')">Temp Down</button>
-        <button ng-click="save()">Save</button>
-        <input ng-model="temperature" type="text">
-      </div>
-      <div>
-        Temperature = <span>{{temperature}}</span>
-        Humidity = <span>{{humidity}}%</span>
-      </div>
-      <!-- <div id="container"></div> -->
-=======
-
->>>>>>> 773c42678d63b5952cd75ecaf2d5fd68cd2a9a6d
     </div>
 
 
@@ -147,7 +83,7 @@
           </div>
 
           <div class="data temperature">
-            <div class="montserrat-normal-black-32px">Temperature</div>
+            <div class="montserrat-normal-black-32px">Graph</div>
             <div ><canvas id="myChart" width="300" height="200"></canvas></div>
             <!-- <img
               class="image-2"
@@ -178,14 +114,24 @@
               <h2>Date</h2>
               <!-- Add Date-->
               <div class="text-2">
-                29/4/2022&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 10:00:00
+                <table>
+                  <tr>
+                    <!-- <th>Date</th>
+                    <th>Time</th>   -->
+                  </tr>
+                  <tr class="water-data" ng-repeat="item in waterData">
+                    <td>{{moment(item.time).format('ll')}}</td>
+                    <td>{{moment(item.time).format('HH:mm')}}</td>  
+                  </tr>
+                </table>
+                <!-- 29/4/2022&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 10:00:00 -->
               </div>
 
             </div>
 
             <div class="overlap-group7 date-data">
               <h2>Total Amount</h2>
-              <div class="number">10</div>
+              <div class="number">{{waterData.length}}</div>
             </div>
             
 
@@ -205,10 +151,20 @@
     </div>      
 
     <div id="container"></div>
+    <button>click</button>
     
 
 
     <script type="module" src ="index.js"></script>
+    <script>
+      var ret;
+      $(document).ready(function(){
+        $("button").click(function(){
+          ret = $.getJSON("https://iz1mjkeoql.execute-api.us-west-1.amazonaws.com/stage/getData?id=Naotest8&from=2022-5-26")
+          console.log(ret);
+        });
+      });
+    </script>
 
 
 
@@ -251,7 +207,7 @@ angular.module('myApp', [])
         }
         for(var i=0;i<data.length;i++){
             var d = data[i];
-            var local = moment.utc(d.time.seconds*1000).local();
+            var local = moment.utc(d.time).local();
             var hour = local.hour();
             var prev = {... ret[hour]};
             var avg = {
@@ -270,11 +226,19 @@ angular.module('myApp', [])
     }
     
     $scope.loadData = async function(){
-        var ret = await getAllDataByDate(2);
+
+        var ret = await getAllData("Naotest8",moment().format("YYYY-M-D"));
         ret = ret.sort(function(x, y){
             return x.time.seconds - y.time.seconds;
         })
-        console.log("ret",ret);
+        // console.log("ret",ret);
+        var clean = [];
+        for(var i = 0;i< ret.length;i++){
+          if(ret[i].temperature >10.0){
+            clean.push(ret[i]);
+          }
+        }
+        ret = clean;
       
         var hourData = $scope.hourData(ret);
 
@@ -292,24 +256,35 @@ angular.module('myApp', [])
     $scope.moment = moment;
     $scope.loadWaterData = async function(){
         var ret = await getAllWaterDataByDate();
-        ret.sort(function(a, b){
-          return a.time.seconds - b.time.seconds;
-        });        
         console.log("loadWaterData",ret);
         $scope.$apply(function () {
           $scope.waterData = ret;
         });
     }
+    $scope.pushIfValid = function(value,list){
+      if(value != 0){
+        list.push(value);
+      }
+      else{
+        list.push(null);
+      }
+    }
     $scope.createChart = function(data){
       var labels = [];
       var temperature = [];
       var soilHumidity = [];
+      var humidity = [];
       var light = [];
       for(var i=0;i<data.length;i++){
           labels.push(data[i].label);
-          temperature.push(data[i].temperature);
-          soilHumidity.push(data[i].soilHumidity/100);
-          light.push(data[i].light);
+          // temperature.push(data[i].temperature);
+          // humidity.push(data[i].humidity);
+          // soilHumidity.push(data[i].soilHumidity/100);
+          // light.push(data[i].light);
+          $scope.pushIfValid(data[i].temperature,temperature);
+          $scope.pushIfValid(data[i].humidity,humidity);
+          $scope.pushIfValid(data[i].soilHumidity/100,soilHumidity);
+          $scope.pushIfValid(data[i].light,light);
       }
       console.log(temperature,labels);
       const ctx = document.getElementById('myChart').getContext('2d');
@@ -324,15 +299,30 @@ angular.module('myApp', [])
               borderColor: 'black',
               backgroundColor: 'white',
               borderWidth: 1,
-            }
+            },
+            {
+              label: 'soilHumidity',
+              data: soilHumidity,
+              borderColor: 'blue',
+              backgroundColor: 'blue',
+              borderWidth: 1,
+            },
+            {
+              label: 'humidity',
+              data: humidity,
+              borderColor: 'green',
+              backgroundColor: 'green',
+              borderWidth: 1,
+            },
           ]
       },
       options: {
           scales: {
               y: {
-                  beginAtZero: false,
+                  beginAtZero: true,
               }
-          }
+          },
+          // spanGaps: true,
       }
       });      
     }
