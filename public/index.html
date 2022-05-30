@@ -61,7 +61,7 @@
 
         <div class="menu_bar">
           <ul>
-            <li><a href="">Home</a></li>
+            <li><a href="home-section">Home</a></li>
             <li><a href="#data-section">Data</a></li>
             <li><a href="#water-section">Water</a></li>
             <li><a href="#about-section">About us</a></li>
@@ -79,10 +79,9 @@
           <h1 class="title">Rod Nam Hai Tee</h1>
           <p class="description">
             Automated plant watering system is programmed using Arduino IDE
-            software. Arduino microcontroller checks soil moisture level, if low,
-            triggering a water pump on until sensor reaches threshold. After this,
-            the system will re-check the soil moisture between periodic intervals
-            to see if you need more water.
+            software. If soil moisture level is low, triggering a water pump on 
+            until sensor reaches threshold. After this, the system will re-check 
+            the soil moisture between periodic intervals to see if you need more water.
           </p>
         </div>
     </div>
@@ -121,14 +120,24 @@
 
         -->
 
+        <div class="left-data">
+
           <div class="data moisture">
             <div class="montserrat-normal-black-32px">Moisture</div>
             <h1 class="percent">{{humidity}}%</h1>
           </div>
 
+          <div class="data soil-moisture">
+            <div class="montserrat-normal-black-32px">Soil Moisture</div>
+            <div id="gauge" class="gauge"></div>
+            
+          </div>
+
+        </div>
+
           <div class="data temperature">
             <div class="montserrat-normal-black-32px">Graph</div>
-            <div ><canvas id="myChart" width="300" height="200"></canvas></div>
+            <div ><canvas id="myChart" height="200"></canvas></div>
             <!-- <img
               class="image-2"
               src="https://anima-uploads.s3.amazonaws.com/projects/627a3db91996a722f08bb46f/releases/627a3dc415efe47701a15528/img/image-2@2x.png"
@@ -136,11 +145,7 @@
           </div>
 
 
-          <div class="data soil-moisture">
-            <div class="montserrat-normal-black-32px">Soil-moisture</div>
-            <div class="gauge" id="gauge"></div>
-            
-          </div>
+          
 
         </div>
     </div>
@@ -159,11 +164,11 @@
               <!-- Add Date-->
               <div class="text-2">
                 <div class="row water-header-data">
-                  <div style="text-align: center;" class="col-md-4">date</div>                  
+                  <div style="text-align: center;" class="col-md-4">Date</div>                  
                   <div style="text-align: center;" class="col-md-2">Time</div>
-                  <div style="text-align: center;" class="col-md-2">soilHumidity</div>
-                  <div style="text-align: center;" class="col-md-2">temperature</div>
-                  <div style="text-align: center;" class="col-md-2">humidity</div>
+                  <div style="text-align: center;" class="col-md-2">Soil Humidity</div>
+                  <div style="text-align: center;" class="col-md-2">Temperature</div>
+                  <div style="text-align: center;" class="col-md-2">Humidity</div>
                 </div>
                 <div style="display:block;height: 150px;overflow-y: auto;overflow-x: hidden;">
                   <div class="row water-data" ng-repeat="item in waterData">
@@ -191,7 +196,7 @@
       </div>
     </div>
 
-    <div class="about-section">
+    <div class="about-section" id="about-section">
       <div class="about">
         <h1>About us</h1>
         <hr>
@@ -602,6 +607,7 @@ angular.module('MyApp', ['ngMaterial'])
         dialStartAngle: 180,
         dialEndAngle: 0,
         labelFontColor: 'black',
+        levelColors: ["#ff0000", "#3CB043"],
         // customSectors : [{"lo":0,"hi":10,"color":"#a9d70b"},
         //            {"lo":11,"hi":22,"color":"#f9c802"},
         //            {"lo":23,"hi":34,"color":"#ff0000"}],
