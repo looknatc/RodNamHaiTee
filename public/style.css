@@ -64,8 +64,13 @@ button.material-icon {
     padding-right: 20px;
     font-size: 24px;
 }
-.water-data > td {
+div.water-data  {
     font-family: 'ui-monospace';
+    font-size: 16px;
+}
+div.water-header-data {
+    font-size: 18px;
+    font-weight: 700;
 }
 .sensor-data {
     display: flex;
@@ -190,6 +195,11 @@ button.material-icon {
     margin: 0 40px 0 40px;
     padding: 20px;
     color: white;
+}
+.water-table{
+    table-layout: auto;
+    width: 100%;
+    text-align: center;
 }
 
 

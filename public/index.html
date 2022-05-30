@@ -139,19 +139,25 @@
           <div class="overlap-group8">
 
             <div class="place-1 date-data">
-              <h2>Date</h2>
+              <h2>Data</h2>
               <!-- Add Date-->
               <div class="text-2">
-                <table>
-                  <tr>
-                    <!-- <th>Date</th>
-                    <th>Time</th>   -->
-                  </tr>
-                  <tr class="water-data" ng-repeat="item in waterData">
-                    <td>{{moment(item.time).format('ll')}}</td>
-                    <td>{{moment(item.time).format('HH:mm')}}</td>  
-                  </tr>
-                </table>
+                <div class="row water-header-data">
+                  <div class="col-md-4">date</div>                  
+                  <div style="text-align: center;" class="col-md-2">Time</div>
+                  <div style="text-align: center;" class="col-md-2">soilHumidity</div>
+                  <div style="text-align: center;" class="col-md-2">temperature</div>
+                  <div style="text-align: center;" class="col-md-2">humidity</div>
+                </div>
+                <div style="display:block;height: 100px;overflow-y: auto;overflow-x: hidden;">
+                  <div class="row water-data" ng-repeat="item in waterData">
+                    <div class="col-md-4">{{moment(item.time).format('ll')}}</div>                  
+                    <div style="text-align: center;" class="col-md-2">{{moment(item.time).format('HH:mm')}}</div>
+                    <div style="text-align: center;" class="col-md-2">{{round(item.soilHumidity)}}</div>
+                    <div style="text-align: center;" class="col-md-2">{{round(item.temperature)}}</div>
+                    <div style="text-align: center;" class="col-md-2">{{round(item.humidity)}}</div>
+                  </div>
+                </div>
                 <!-- 29/4/2022&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 10:00:00 -->
               </div>
 
@@ -178,6 +184,7 @@
       
     </div>  
     <button>click</button> 
+
     <p>Date: <input type="text" id="datepicker"></p>
     
 
@@ -196,14 +203,38 @@
       });
     </script>
     <script>
-   
+     
     </script>
 
 
 
 <script>
+  async function uploadS3(data){
+    const result = await $.ajax({
+        url: 'http://iotdevicecfg.s3.ap-southeast-1.amazonaws.com/iotdevicecfg.json',
+        type: 'PUT',
+        data: JSON.stringify(data),
+    });
+    return result;
+}
+
+async function loadFromS3(){
+    const result = await $.ajax({
+        url: 'http://iotdevicecfg.s3.ap-southeast-1.amazonaws.com/iotdevicecfg.json',
+        type: 'GET',
+    });
+    return JSON.parse(result);
+}
 angular.module('myApp', [])
 .controller('myControl', function($scope) {
+    $scope.setting = {
+      temperature: 37.0,
+      soilHumidity: 75,
+      humidity: 20,
+      waterTimer: 5,
+      doEvery: 15,
+      
+    }
     $scope.temperature = "";
     $scope.humidity = "";
     $scope.light = "";
@@ -257,6 +288,19 @@ angular.module('myApp', [])
         console.log(ret);
         return ret;
     }
+    $scope.saveSetting = async function(){
+      var s ="";
+      s+=$scope.setting.temperature;
+      s+=" "+ $scope.setting.soilHumidity;
+      s+=" "+ $scope.setting.humidity;
+      s+=" "+ $scope.setting.waterTimer;
+      s+=" "+ $scope.setting.doEvery;
+      console.log("savesetting",s);
+      await uploadS3(s);
+      var setting = await loadFromS3();
+      console.log(setting);
+    }
+    $scope.saveSetting();
     
     /*$scope.loadData = async function(){
 
@@ -301,7 +345,7 @@ angular.module('myApp', [])
         // console.log("ret",ret);
         var clean = [];
         for(var i = 0;i< ret.length;i++){
-          if(ret[i].temperature >10.0){
+          if(ret[i].temperature >10.0 && ret[i].temperature != "NaN"){
             clean.push(ret[i]);
           }
         }
