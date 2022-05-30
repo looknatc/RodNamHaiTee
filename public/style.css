@@ -72,29 +72,24 @@ div.water-header-data {
     font-size: 18px;
     font-weight: 700;
 }
+
 .sensor-data {
     display: flex;
     font-size: 36px;
-    
     margin-left: 70px;   
     margin-top: 50px;
     margin-right: 70px;
-    align-self: center;
     /* min-width: 1220px; */
 }
 
 .data {
     background: #d3eece;
-
- /*   background-color: #a1b394; */
     border-radius: 32px;
-    margin-left: 50px;
-    min-height: 240px;
+    margin-left: 70px;
     margin-bottom: 40px;
     padding: 20px 44px;
     text-align: center;
     align-items: center;
-    
 }
 
 .montserrat-normal-black-32px {
@@ -131,15 +126,27 @@ div.water-header-data {
 }
 
 .moisture{
-    width: 20%;
+    height: 180;
+}
+
+.gauge{
+    height: 250;
+}
+
+.left-data{
+    height: fit-content;
 }
 
 .temperature{
-    width: 40%;
+    width: 50%;
+}
+
+.myChart{
+    
 }
 
 .soil-moisture{
-    width: 40%;
+   height: auto;
 }
 
 .watering-section{
@@ -203,6 +210,7 @@ div.water-header-data {
 }
 
 
+
 @media screen and (max-width: 1300px) and (min-width:600px){
     
     .sensor-data{
@@ -221,6 +229,7 @@ div.water-header-data {
 
     .moisture {
         width: auto;
+    
     }
     .temperature {
         width: auto;
@@ -262,6 +271,10 @@ div.water-header-data {
         margin-left: 0;
     }
 
+    div.water-header-data {
+       font-size: 14px;
+    }
+
 }
 
 @media screen and (max-width: 600px){
@@ -288,7 +301,9 @@ div.water-header-data {
 
     .moisture {
         width: auto;
-    }
+        height: 100;
+        }
+    
     .temperature {
         width: auto;
     }
@@ -323,7 +338,7 @@ div.water-header-data {
         text-indent: 18px;
         padding-top: 0px;
         padding-right: 10px;
-        font-size: 10px;
+        font-size: 9px;
     }
 
     .collected-data{
@@ -350,7 +365,7 @@ div.water-header-data {
     }
 
     .data{
-        min-height: 100px;
+        min-height: 50px;
         margin: 10px;
     }
 
@@ -381,5 +396,10 @@ div.water-header-data {
         height: auto;
     }
 
+    div.water-header-data {
+        font-size: 12px;
+     }
 
 }
+
+
