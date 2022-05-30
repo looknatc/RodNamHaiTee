@@ -73,7 +73,7 @@ async function getAllData(id = "Naotest8", date = "2022-5-26"){
         ret.push({
             id:d[0],
             humidity:parseFloat(d[1]),
-            soilHumidity: (4000 - parseFloat(d[2]))/3000*100,
+            soilHumidity: (4500 - parseFloat(d[2]))/4000*100,
             temperature:parseFloat(d[3]),
             light:parseFloat(d[4]),
             watering:d[5],
