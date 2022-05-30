@@ -14,6 +14,12 @@ body{
     margin: 0px !important;
 }
 
+button.material-icon {
+    background-color: transparent;
+    border: none;
+    vertical-align: sub;
+}
+
 .header ul {
     display: flex;
 }

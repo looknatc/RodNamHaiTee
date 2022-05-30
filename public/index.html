@@ -17,6 +17,16 @@
     <!-- chart.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+        'FILL' 0,
+        'wght' 500,
+        'GRAD' 0,
+        'opsz' 40
+      }
+      </style>
     <!--https://github.com/toorshia/justgage-->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.4/raphael-min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/justgage/1.2.9/justgage.min.js"></script>
@@ -24,6 +34,9 @@
     <!-- <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-base.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 
   </head>
 
@@ -61,8 +74,22 @@
 
     <div class="collected-data" id="data-section">
         <h1>Collected Data</h1>
+        <div class="row">
+            <div class="col-md-5"></div>
+            <div class="col-md-2">
+              <div style="text-align: center;">
+                <button class="material-icon"><span ng-click="changedate(-1)" class="material-symbols-outlined">
+                  chevron_left
+                </span></button>
+                <span style="font-size:20px;">{{selectedDate}}</span>
+                <button class="material-icon"><span ng-click="changedate(1)" class="material-symbols-outlined">
+                  chevron_right
+                </span></button>
+              </div>
+            </div>
+            <div class="col-md-5"></div>
+        </div>
         <hr style="width: 50%;">
-
         <div class="sensor-data">
 
           <!--
@@ -151,6 +178,7 @@
       
     </div>  
     <button>click</button> 
+    <p>Date: <input type="text" id="datepicker"></p>
     
 
     
@@ -166,6 +194,9 @@
           console.log(ret);
         });
       });
+    </script>
+    <script>
+   
     </script>
 
 
@@ -227,12 +258,16 @@ angular.module('myApp', [])
         return ret;
     }
     
-    $scope.loadData = async function(){
+    /*$scope.loadData = async function(){
 
         var ret = await getAllData("Naotest8",moment().format("YYYY-M-D"));
+        if( ret.length == 0){
+          return;
+        }
         ret = ret.sort(function(x, y){
             return x.time.seconds - y.time.seconds;
         })
+        
         // console.log("ret",ret);
         var clean = [];
         for(var i = 0;i< ret.length;i++){
@@ -255,10 +290,56 @@ angular.module('myApp', [])
             $scope.gauge.refresh($scope.soilHumidity);
             $scope.createChart(hourData);
         });
+    }*/
+    $scope.loadData = async function(){
+        var ret = await getAllData($scope.id,$scope.selectedDate);
+        $scope.rawData = ret;
+        ret = ret.sort(function(x, y){
+            return x.time.seconds - y.time.seconds;
+        })
+
+        // console.log("ret",ret);
+        var clean = [];
+        for(var i = 0;i< ret.length;i++){
+          if(ret[i].temperature >10.0){
+            clean.push(ret[i]);
+          }
+        }
+        ret = clean;
+        console.log("cleandata",ret);
+
+        var hourData = $scope.hourData(ret);
+
+        $scope.$apply(function () {
+            if(ret.length > 0){
+              var last = ret[ret.length -1];
+              console.log("loadData",last);
+              $scope.temperature = last.temperature;
+              $scope.humidity = $scope.round(last.humidity);
+              $scope.light = last.light;
+              $scope.soilHumidity = last.soilHumidity;
+              
+            }else{
+              $scope.temperature = null;
+              $scope.humidity = null;
+              $scope.light = null;
+              $scope.soilHumidity = null;
+            }
+            $scope.gauge.refresh($scope.soilHumidity);
+            $scope.createChart(hourData);            
+        });
+        $scope.loadWaterData();
     }
     $scope.moment = moment;
-    $scope.loadWaterData = async function(){
+    /*$scope.loadWaterData = async function(){
         var ret = await getAllWaterDataByDate("Naotest8",moment().format("YYYY-M-D"));
+        console.log("loadWaterData",ret);
+        $scope.$apply(function () {
+          $scope.waterData = ret;
+        });
+    }*/
+    $scope.loadWaterData = async function(){
+        var ret = await getAllWaterDataByDate($scope.rawData);
         console.log("loadWaterData",ret);
         $scope.$apply(function () {
           $scope.waterData = ret;
@@ -272,6 +353,7 @@ angular.module('myApp', [])
         list.push(null);
       }
     }
+    $scope.myChart = null;
     $scope.createChart = function(data){
       var labels = [];
       var temperature = [];
@@ -290,44 +372,53 @@ angular.module('myApp', [])
           $scope.pushIfValid(data[i].light,light);
       }
       console.log(temperature,labels);
-      const ctx = document.getElementById('myChart').getContext('2d');
-      const myChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-          labels: labels,
-          datasets: [
-            {
-              label: 'Temperature',
-              data: temperature,
-              borderColor: 'black',
-              backgroundColor: 'white',
-              borderWidth: 1,
+      var datasets = [
+              {
+                label: 'Temperature',
+                data: temperature,
+                borderColor: 'black',
+                backgroundColor: 'white',
+                borderWidth: 1,
+              },
+              {
+                label: 'soilHumidity',
+                data: soilHumidity,
+                borderColor: 'brown',
+                backgroundColor: 'brown',
+                borderWidth: 1,
+              },
+              {
+                label: 'humidity',
+                data: humidity,
+                borderColor: 'green',
+                backgroundColor: 'green',
+                borderWidth: 1,
+              },
+      ];
+      if($scope.myChart !=null){
+        for(var i = 0;i<temperature.length;i++){
+          $scope.myChart.data.datasets[0].data[i] = temperature[i];
+          $scope.myChart.data.datasets[1].data[i] = soilHumidity[i];
+          $scope.myChart.data.datasets[2].data[i] = humidity[i];
+        }
+        $scope.myChart.update();
+      }else{
+        const ctx = document.getElementById('myChart').getContext('2d');
+        $scope.myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: datasets,
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                }
             },
-            {
-              label: 'soilHumidity',
-              data: soilHumidity,
-              borderColor: 'brown',
-              backgroundColor: 'brown',
-              borderWidth: 1,
-            },
-            {
-              label: 'humidity',
-              data: humidity,
-              borderColor: 'green',
-              backgroundColor: 'green',
-              borderWidth: 1,
-            },
-          ]
-      },
-      options: {
-          scales: {
-              y: {
-                  beginAtZero: true,
-              }
-          },
-          // spanGaps: true,
+        }
+        });      
       }
-      });      
     }
     $scope.gauge = new JustGage({
         id: "gauge", // the id of the html element
@@ -345,10 +436,32 @@ angular.module('myApp', [])
         //            {"lo":23,"hi":34,"color":"#ff0000"}],
     });
 
+    $( "#datepicker" ).datepicker({
+      onSelect: function(dateText) {
+        console.log("Selected date: " + dateText + "; input's current value: " + this.value);
+        $scope.$apply(function () {
+          $scope.changedate();
+        });
+      }
+    });
+    $scope.id = "Naotest8";
+    $scope.selectedDate = moment().format("YYYY-M-D");
+    $scope.changedate = function(days){
+        if(days == null){
+          var x = $('#datepicker').val().split('/');
+          $scope.selectedDate = [x[2],x[0],x[1]].join('-');
+        }else{
+          $scope.selectedDate = moment($scope.selectedDate).add(days, 'days').format("YYYY-M-D");
+        }
+        $scope.loadData();
+        //$scope.loadWaterData();
+    }
+    // load today data
     $scope.loadData();
-    $scope.loadWaterData();
-
+    //$scope.loadWaterData();
 });      
+
+
     </script>
   </body>
 </html>

@@ -93,9 +93,9 @@ async function getAllData(id = "Naotest8", date = "2022-5-26"){
 }
 // await getAllData();
 
-async function getAllWaterDataByDate(id = "Naotest8", date = "2022-5-26"){
+async function getAllWaterDataByDate(data){
     // var ret = [];
-    var data = await getAllData(id,date);
+    //var data = await getAllData(id,date);
     // var start = moment().subtract(days+1, 'days');
     // var stop = moment().add(1, 'days');
     // for(var i =0;i<data.length;i++){
