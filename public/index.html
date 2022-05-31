@@ -4,7 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rod Nam Hai Tee</title>
-    <link rel="stylesheet" href="style.css" />
+    
     
     <!-- jquery  -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -50,6 +50,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+    <!-- favicon icon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png">
+    <link rel="manifest" href="./assets/site.webmanifest">
+
+    <link rel="stylesheet" href="style.css" />
   </head>
 
 
@@ -123,7 +130,7 @@
         <div class="left-data">
 
           <div class="data moisture">
-            <div class="montserrat-normal-black-32px">Moisture</div>
+            <div class="montserrat-normal-black-32px">Humidity</div>
             <h1 class="percent">{{humidity}}%</h1>
           </div>
 
@@ -166,7 +173,7 @@
                 <div class="row water-header-data">
                   <div style="text-align: center;" class="col-md-4">Date</div>                  
                   <div style="text-align: center;" class="col-md-2">Time</div>
-                  <div style="text-align: center;" class="col-md-2">Soil Humidity</div>
+                  <div style="text-align: center;" class="col-md-2">Soil Moisture</div>
                   <div style="text-align: center;" class="col-md-2">Temperature</div>
                   <div style="text-align: center;" class="col-md-2">Humidity</div>
                 </div>
@@ -213,12 +220,12 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Modal Header</h4>
+            <h4 class="modal-title">Setting</h4>
           </div>
           <div class="modal-body">
             <!-- temperature -->
             <md-slider-container>
-              <span>temp</span>
+              <span>Temperature <br>(C)</span>
               <md-slider min="10" max="50" ng-model="setting.temperature" aria-label="red" id="red-slider"
                         class="md-warn">
               </md-slider>
@@ -229,18 +236,18 @@
 
             <!-- humidity -->
             <md-slider-container>
-              <span>humid</span>
-              <md-slider min="10" max="60" ng-model="setting.humidity" aria-label="blue" id="red-slider"
+              <span>Humidity <br>(%)</span>
+              <md-slider min="10" max="60" ng-model="setting.humidity" aria-label="blue" id="blue-slider"
                         class="md-warn">
               </md-slider>
               <md-input-container>
-                <input type="number" ng-model="setting.humidity" aria-label="blue" aria-controls="red-slider">
+                <input type="number" ng-model="setting.humidity" aria-label="blue" aria-controls="blue-slider">
               </md-input-container>
             </md-slider-container>
 
             <!-- soil -->
             <md-slider-container>
-              <span>soil-moist</span>
+              <span>Soil-moisture <br>(%)</span>
               <md-slider min="10" max="90" ng-model="setting.soilHumidity" aria-label="red" id="red-slider"
                         class="md-warn">
               </md-slider>
@@ -251,7 +258,7 @@
 
             <!-- water timer -->
             <md-slider-container>
-              <span>water-timer</span>
+              <span>Water-timer <br>(sec)</span>
               <md-slider min="3" max="20" ng-model="setting.waterTimer" aria-label="red" id="red-slider"
                         class="md-warn">
               </md-slider>
@@ -262,7 +269,7 @@
 
             <!-- do every -->
             <md-slider-container>
-              <span>doEvery</span>
+              <span>Intervals <br>(min)</span>
               <md-slider min="1" max="180" ng-model="setting.doEvery" aria-label="red" id="red-slider"
                         class="md-warn">
               </md-slider>
@@ -271,10 +278,15 @@
               </md-input-container>
             </md-slider-container>
 
+            <!-- power saving mode -->
+            <md-switch ng-model="setting.powerSaving" aria-label="Switch 1">
+              power saving mode
+            </md-switch>
+
 
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="saveSetting();">save change</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveSetting();">save change</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
         </div>
@@ -317,7 +329,7 @@
 <script>
   async function uploadS3(data){
     const result = await $.ajax({
-        url: 'http://iotdevicecfg.s3.ap-southeast-1.amazonaws.com/iotdevicecfg.json',
+        url: 'https://iotdevicecfg.s3.ap-southeast-1.amazonaws.com/iotdevicecfg.json',
         type: 'PUT',
         data: JSON.stringify(data),
     });
@@ -326,7 +338,7 @@
 
 async function loadFromS3(){
     const result = await $.ajax({
-        url: 'http://iotdevicecfg.s3.ap-southeast-1.amazonaws.com/iotdevicecfg.json',
+        url: 'https://iotdevicecfg.s3.ap-southeast-1.amazonaws.com/iotdevicecfg.json',
         type: 'GET',
     });
     return JSON.parse(result);
@@ -339,6 +351,7 @@ angular.module('MyApp', ['ngMaterial'])
       humidity: 0,
       waterTimer: 0,
       doEvery: 0,
+      powerSaving:false,
       
     }
     $scope.log = function(){
@@ -404,6 +417,13 @@ angular.module('MyApp', ['ngMaterial'])
       s+=" "+ $scope.setting.humidity;
       s+=" "+ $scope.setting.waterTimer;
       s+=" "+ $scope.setting.doEvery;
+      if($scope.setting.powerSaving){
+        s+=" 1";
+      }
+      else{
+        s+=" 0";
+      }
+     
       console.log("savesetting",s);
       await uploadS3(s);
       var setting = await loadFromS3();
@@ -417,6 +437,7 @@ angular.module('MyApp', ['ngMaterial'])
       $scope.setting.humidity = parseFloat(s[2]);
       $scope.setting.waterTimer = parseInt(s[3]);
       $scope.setting.doEvery = parseInt(s[4]);
+      $scope.setting.powerSaving = parseInt(s[5])==1;
 
       // var s ="";
       // s+=$scope.setting.temperature;
@@ -466,17 +487,17 @@ angular.module('MyApp', ['ngMaterial'])
         });
     }*/
     $scope.loadData = async function(){
-        $scope.loadSetting();
+        await $scope.loadSetting();
         var ret = await getAllData($scope.id,$scope.selectedDate);
         $scope.rawData = ret;
         ret = ret.sort(function(x, y){
             return x.time.seconds - y.time.seconds;
         })
 
-        // console.log("ret",ret);
+        console.log("raw data",ret);
         var clean = [];
         for(var i = 0;i< ret.length;i++){
-          if(ret[i].temperature >10.0 && ret[i].temperature != "NaN"){
+          if(ret[i].temperature >10.0 && ret[i].temperature != "NaN" ){
             clean.push(ret[i]);
           }
         }

@@ -70,6 +70,7 @@ async function getAllData(id = "Naotest8", date = "2022-5-26"){
     for(var i = 0;i< tmp.result.length;i++){
         var d = tmp.result[i].data;
         // deviceID, Humidity, SoilHumidity, Temperature, light, relayRunning
+        
         ret.push({
             id:d[0],
             humidity:parseFloat(d[1]),
@@ -80,6 +81,8 @@ async function getAllData(id = "Naotest8", date = "2022-5-26"){
             time:tmp.result[i].createTime,
 
         });
+        
+        
     }
     // const querySnapshot = await getDocs(_data_ref);
     // var ret = [];

@@ -208,6 +208,35 @@ div.water-header-data {
     width: 100%;
     text-align: center;
 }
+.btn-primary{
+    border-color: rgb(255,87,34);
+    background-color: rgb(255,87,34);
+}
+.btn-primary:hover {
+    border-color: rgb(206, 68, 27);
+    background-color: rgb(206, 68, 27);
+}
+md-switch.md-default-theme.md-checked:not([disabled]) .md-thumb, md-switch.md-checked:not([disabled]) .md-thumb {
+    background-color: rgb(206, 68, 27);
+}
+md-switch.md-default-theme.md-checked:not([disabled]) .md-bar, md-switch.md-checked:not([disabled]) .md-bar {
+    background-color: rgb(255, 125, 85);
+}
+
+md-slider-container>:first-child:not(md-slider) {
+    min-width: 100px;
+    /* max-width: 41px;
+    height: 25px;
+    transition: all .4s cubic-bezier(.25,.8,.25,1);
+    transition-property: color,max-width; */
+}
+@media (min-width: 768px){
+    .modal-dialog {
+        width: 731px;
+        margin: 30px auto;
+    }
+}
+
 
 
 
