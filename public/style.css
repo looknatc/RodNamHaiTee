@@ -76,9 +76,9 @@ div.water-header-data {
 .sensor-data {
     display: flex;
     font-size: 36px;
-    margin-left: 70px;   
+    margin-left: 95px;   
     margin-top: 50px;
-    margin-right: 70px;
+    
     /* min-width: 1220px; */
 }
 
@@ -135,6 +135,7 @@ div.water-header-data {
 
 .left-data{
     height: fit-content;
+    margin-right: 20px;
 }
 
 .temperature{
@@ -240,7 +241,7 @@ md-slider-container>:first-child:not(md-slider) {
 
 
 
-@media screen and (max-width: 1300px) and (min-width:600px){
+@media screen and (max-width: 1300px) and (min-width:730px){
     
     .sensor-data{
         flex-direction: column;
@@ -278,6 +279,10 @@ md-slider-container>:first-child:not(md-slider) {
         font-size: 16px;
     }
 
+    .col-md-2{
+        margin: 0;
+    }
+
     .overlap-group8{
         flex-direction: column;
         padding: 40px;
@@ -304,9 +309,13 @@ md-slider-container>:first-child:not(md-slider) {
        font-size: 14px;
     }
 
+    .left-data{
+        margin-right: 0;
+    }
+
 }
 
-@media screen and (max-width: 600px){
+@media screen and (max-width: 730px){
 
     .header img{
         height: 30%;
@@ -329,15 +338,17 @@ md-slider-container>:first-child:not(md-slider) {
     }
 
     .moisture {
+        
         width: auto;
         height: 100;
-        }
+    }
     
     .temperature {
         width: auto;
     }
     .soil-moisture {
         width: auto;
+        height: 200px;
     }
 
     .title {
@@ -377,7 +388,6 @@ md-slider-container>:first-child:not(md-slider) {
     .collected-data h1{
         font-size: 26px;
         margin: 0;
-        margin-top: 20px;
         padding: 0;
     }
 
@@ -428,6 +438,23 @@ md-slider-container>:first-child:not(md-slider) {
     div.water-header-data {
         font-size: 12px;
      }
+
+     div.water-data  {
+        font-size: 10px;
+    }
+
+     .left-data{
+         margin-right: 0;
+     }
+
+     .select-dated{
+         text-align: center;
+         align-items: center;
+     }
+
+
+    
+    
 
 }
 
