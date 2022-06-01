@@ -74,9 +74,12 @@
             <li><a href="#about-section">About us</a></li>
             <!-- <li><a href="">+</a></li> -->
             <!-- type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" -->
-            <button type="button" class="material-icon " style="margin-left: 40;" data-toggle="modal" data-target="#myModal"><span  class="material-symbols-outlined">
+            <button type="button" class="material-icon " style="margin-left: 40;" data-toggle="modal" data-target="#myModal" ><span  class="material-symbols-outlined">
               tune
             </span></button>
+            <!-- <button type="button" class="material-icon " style="margin-left: 40;" data-toggle="modal" data-target="#myModal" ng-click="compare();"  ><span  class="material-symbols-outlined">
+              tune
+            </span></button> -->
             
           </ul>
         </div>
@@ -133,12 +136,20 @@
             <div class="montserrat-normal-black-32px">Humidity</div>
             <h1 class="percent">{{humidity}}%</h1>
           </div>
+          <!-- <div class="data moisture">
+            <div class="montserrat-normal-black-32px">Temperature</div>
+            <h1 class="percent">{{temperature}} °C</h1>
+          </div> -->
 
           <div class="data soil-moisture">
             <div class="montserrat-normal-black-32px">Soil Moisture</div>
             <div id="gauge" class="gauge"></div>
             
           </div>
+          <!-- <div class="data moisture">
+            <div class="montserrat-normal-black-32px">Temperature</div>
+            <h1 class="percent">{{temperature}} °C</h1>
+          </div> -->
 
         </div>
 
@@ -212,7 +223,7 @@
       
     </div>  
     <!-- <button>click</button>  -->
-    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+    <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
     <div id="myModal" class="modal fade" role="dialog">
       <div class="modal-dialog">
     
@@ -225,7 +236,10 @@
           <div class="modal-body">
             <!-- temperature -->
             <md-slider-container>
-              <span>Temperature <br>(C)</span>
+              <span class="material-symbols-outlined">
+                device_thermostat
+                </span>
+              <span>Temperature <br>(°C)</span>
               <md-slider min="10" max="50" ng-model="setting.temperature" aria-label="red" id="red-slider"
                         class="md-warn">
               </md-slider>
@@ -236,6 +250,9 @@
 
             <!-- humidity -->
             <md-slider-container>
+              <span class="material-symbols-outlined">
+                humidity_mid
+                </span>
               <span>Humidity <br>(%)</span>
               <md-slider min="10" max="60" ng-model="setting.humidity" aria-label="blue" id="blue-slider"
                         class="md-warn">
@@ -247,6 +264,9 @@
 
             <!-- soil -->
             <md-slider-container>
+              <span class="material-symbols-outlined">
+                local_drink
+                </span>
               <span>Soil-moisture <br>(%)</span>
               <md-slider min="10" max="90" ng-model="setting.soilHumidity" aria-label="red" id="red-slider"
                         class="md-warn">
@@ -258,6 +278,9 @@
 
             <!-- water timer -->
             <md-slider-container>
+              <span class="material-symbols-outlined">
+                shower
+                </span>
               <span>Water-timer <br>(sec)</span>
               <md-slider min="3" max="20" ng-model="setting.waterTimer" aria-label="red" id="red-slider"
                         class="md-warn">
@@ -269,6 +292,9 @@
 
             <!-- do every -->
             <md-slider-container>
+              <span class="material-symbols-outlined">
+                timer
+                </span>
               <span>Intervals <br>(min)</span>
               <md-slider min="1" max="180" ng-model="setting.doEvery" aria-label="red" id="red-slider"
                         class="md-warn">
@@ -286,15 +312,16 @@
 
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveSetting();">save change</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveSetting();" ng-hide="compare();">save change</button>
+            <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveSetting();" >save change</button> -->
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
         </div>
     
       </div>
     </div>
-    <p>Date: <input type="text" id="datepicker"></p>
-    <div  ng-cloak="" >
+    <!-- <p>Date: <input type="text" id="datepicker"></p> -->
+    <!-- <div  ng-cloak="" >
       <md-slider-container>
         <span>R</span>
         <md-slider min="0" max="255" ng-model="color.red" aria-label="red" class="md-warn">
@@ -303,7 +330,7 @@
           <input type="number" ng-model="color.red" aria-label="red" aria-controls="red-slider">
         </md-input-container>
       </md-slider-container>
-    </div>
+    </div> -->
     
 
     
@@ -346,6 +373,16 @@ async function loadFromS3(){
 angular.module('MyApp', ['ngMaterial'])
 .controller('myControl', function($scope) {
     $scope.setting = {
+      temperature: 0.0,
+      soilHumidity: 0,
+      humidity: 0,
+      waterTimer: 0,
+      doEvery: 0,
+      powerSaving:false,
+      
+    }
+
+    $scope.tmpsetting = {
       temperature: 0.0,
       soilHumidity: 0,
       humidity: 0,
@@ -410,6 +447,19 @@ angular.module('MyApp', ['ngMaterial'])
         console.log(ret);
         return ret;
     }
+    $scope.compare = function(){
+      var x = $scope.setting.temperature == $scope.tmpsetting.temperature  && 
+        $scope.setting.soilHumidity == $scope.tmpsetting.soilHumidity &&
+        $scope.setting.humidity == $scope.tmpsetting.humidity &&
+        $scope.setting.waterTimer == $scope.tmpsetting.waterTimer &&
+        $scope.setting.doEvery == $scope.tmpsetting.doEvery &&
+        $scope.setting.powerSaving == $scope.tmpsetting.powerSaving ;
+        console.log("compare  ",x);
+        console.log("setting", $scope.setting);
+        console.log("tmp setting", $scope.tmpsetting);
+      return x;
+    }
+    
     $scope.saveSetting = async function(){
       var s ="";
       s+=$scope.setting.temperature;
@@ -428,6 +478,7 @@ angular.module('MyApp', ['ngMaterial'])
       await uploadS3(s);
       var setting = await loadFromS3();
       console.log(setting);
+      await $scope.loadTmpSetting();
     }
     $scope.loadSetting = async function(){
       var x = await loadFromS3();
@@ -449,6 +500,25 @@ angular.module('MyApp', ['ngMaterial'])
       // await uploadS3(s);
       // var setting = await loadFromS3();
       console.log("load setting",  $scope.setting);
+    }
+    $scope.loadTmpSetting = async function(){
+      $scope.tmpsetting.temperature =  $scope.setting.temperature;
+      $scope.tmpsetting.soilHumidity = $scope.setting.soilHumidity;
+      $scope.tmpsetting.humidity = $scope.setting.humidity;
+      $scope.tmpsetting.waterTimer = $scope.setting.waterTimer;
+      $scope.tmpsetting.doEvery = $scope.setting.doEvery;
+      $scope.tmpsetting.powerSaving = $scope.setting.powerSaving;
+
+      // var s ="";
+      // s+=$scope.setting.temperature;
+      // s+=" "+ $scope.setting.soilHumidity;
+      // s+=" "+ $scope.setting.humidity;
+      // s+=" "+ $scope.setting.waterTimer;
+      // s+=" "+ $scope.setting.doEvery;
+      // console.log("savesetting",s);
+      // await uploadS3(s);
+      // var setting = await loadFromS3();
+      console.log("load tmp setting",  $scope.tmpsetting);
     }
 
     // $scope.saveSetting();
@@ -488,6 +558,7 @@ angular.module('MyApp', ['ngMaterial'])
     }*/
     $scope.loadData = async function(){
         await $scope.loadSetting();
+        await $scope.loadTmpSetting();
         var ret = await getAllData($scope.id,$scope.selectedDate);
         $scope.rawData = ret;
         ret = ret.sort(function(x, y){
