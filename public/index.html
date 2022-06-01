@@ -1,120 +1,171 @@
-<html  lang="en" >
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rod Nam Hai Tee</title>
-    
-    
+
     <!-- jquery  -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <!-- bootstrap  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0-beta1/css/bootstrap-grid.min.css" integrity="sha512-QWjMsIpO5eW4+c4ASTEaZ4+eZNZ4YTtSDiu167Rq1Eqw//WlO+rXo4OvZMpyW/ykbN5LFeXmN6N416OzmWo7fA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0-beta1/css/bootstrap-grid.min.css"
+      integrity="sha512-QWjMsIpO5eW4+c4ASTEaZ4+eZNZ4YTtSDiu167Rq1Eqw//WlO+rXo4OvZMpyW/ykbN5LFeXmN6N416OzmWo7fA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <!-- angular js -->
     <!-- Angular Material Dependencies -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-aria.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-messages.min.js"></script>
-    
+
     <!-- Angular Material Javascript now available via Google CDN; version 1.2.1 used here -->
     <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.2.1/angular-material.min.js"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js" integrity="sha512-KZmyTq3PLx9EZl0RHShHQuXtrvdJ+m35tuOiwlcZfs/rE7NZv29ygNA8SFCkMXTnYZQK2OX0Gm2qKGfvWEtRXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
     <!-- moment js -->
-    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.3/moment.min.js"></script>    
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.3/moment.min.js"></script>
     <!-- chart.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
+      integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
     <style>
       .material-symbols-outlined {
-        font-variation-settings:
-        'FILL' 0,
-        'wght' 500,
-        'GRAD' 0,
-        'opsz' 40
+        font-variation-settings: "FILL" 0, "wght" 500, "GRAD" 0, "opsz" 40;
       }
-      </style>
-     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.2.1/angular-material.min.css">
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://ajax.googleapis.com/ajax/libs/angular_material/1.2.1/angular-material.min.css"
+    />
 
     <!--https://github.com/toorshia/justgage-->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.4/raphael-min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/justgage/1.2.9/justgage.min.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.4/raphael-min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/justgage/1.2.9/justgage.min.js"
+    ></script>
     <!-- line chart -->
     <!-- <script src="https://cdn.anychart.com/releases/8.10.0/js/anychart-base.min.js"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
+      integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
 
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css"
+    />
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
     <!-- modal -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <!-- favicon icon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png">
-    <link rel="manifest" href="./assets/site.webmanifest">
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./assets/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./assets/favicon-16x16.png"
+    />
+    <link rel="manifest" href="./assets/site.webmanifest" />
 
     <link rel="stylesheet" href="style.css" />
   </head>
 
-
-  <body ng-controller="myControl"  ng-app="MyApp">
+  <body ng-controller="myControl" ng-app="MyApp">
     <!-- Header -->
     <div class="header">
-
       <img src="assets/images/header-background.png" style="width: 100%" />
 
-        <div class="menu_bar">
-          <ul>
-            <li><a href="home-section">Home</a></li>
-            <li><a href="#data-section">Data</a></li>
-            <li><a href="#water-section">Water</a></li>
-            <li><a href="#about-section">About us</a></li>
-            <!-- <li><a href="">+</a></li> -->
-            <!-- type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" -->
-            <button type="button" class="material-icon " style="margin-left: 40;" data-toggle="modal" data-target="#myModal"><span  class="material-symbols-outlined">
-              tune
-            </span></button>
-            
-          </ul>
-        </div>
+      <div class="menu_bar">
+        <ul>
+          <li><a href="home-section">Home</a></li>
+          <li><a href="#data-section">Data</a></li>
+          <li><a href="#water-section">Water</a></li>
+          <li><a href="#about-section">About us</a></li>
+          <!-- <li><a href="">+</a></li> -->
+          <!-- type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" -->
+          <button
+            type="button"
+            class="material-icon"
+            style="margin-left: 40"
+            data-toggle="modal"
+            data-target="#myModal"
+          >
+            <span class="material-symbols-outlined"> tune </span>
+          </button>
+        </ul>
+      </div>
 
-
-        <div class="text_block">
-          <h1 class="title">Rod Nam Hai Tee</h1>
-          <p class="description">
-            Automated plant watering system is programmed using Arduino IDE
-            software. If soil moisture level is low, triggering a water pump on 
-            until sensor reaches threshold. After this, the system will re-check 
-            the soil moisture between periodic intervals to see if you need more water.
-          </p>
-        </div>
+      <div class="text_block">
+        <h1 class="title">Rod Nam Hai Tee</h1>
+        <p class="description">
+          Automated plant watering system is programmed using Arduino IDE
+          software. If soil moisture level is low, triggering a water pump on
+          until sensor reaches threshold. After this, the system will re-check
+          the soil moisture between periodic intervals to see if you need more
+          water.
+        </p>
+      </div>
     </div>
 
-
     <div class="collected-data" id="data-section">
-        <h1>Collected Data</h1>
-        <div class="row">
-            
-            <div class="select-dated">
-              <div style="text-align: center;">
-                <button class="material-icon"><span ng-click="changedate(-1)" class="material-symbols-outlined">
-                  chevron_left
-                </span></button>
-                <span style="font-size:20px;">{{selectedDate}}</span>
-                <button class="material-icon"><span ng-click="changedate(1)" class="material-symbols-outlined">
-                  chevron_right
-                </span></button>
-              </div>
-            </div>
-           
+      <h1>Collected Data</h1>
+      <div class="row">
+        <div class="select-dated">
+          <div style="text-align: center">
+            <button class="material-icon">
+              <span ng-click="changedate(-1)" class="material-symbols-outlined">
+                chevron_left
+              </span>
+            </button>
+            <span style="font-size: 20px">{{selectedDate}}</span>
+            <button class="material-icon">
+              <span ng-click="changedate(1)" class="material-symbols-outlined">
+                chevron_right
+              </span>
+            </button>
+          </div>
         </div>
-        <hr style="width: 50%;">
-        <div class="sensor-data">
-
-          <!--
+      </div>
+      <hr style="width: 50%" />
+      <div class="sensor-data">
+        <!--
 
           <div class="light">
             <div class=" montserrat-normal-black-32px">Light</div>
@@ -128,7 +179,6 @@
         -->
 
         <div class="left-data">
-
           <div class="data moisture">
             <div class="montserrat-normal-black-32px">Humidity</div>
             <h1 class="percent">{{humidity}}%</h1>
@@ -137,144 +187,223 @@
           <div class="data soil-moisture">
             <div class="montserrat-normal-black-32px">Soil Moisture</div>
             <div id="gauge" class="gauge"></div>
-            
           </div>
-
         </div>
 
-          <div class="data temperature">
-            <div class="montserrat-normal-black-32px">Graph</div>
-            <div ><canvas id="myChart" height="200"></canvas></div>
-            <!-- <img
+        <div class="data temperature">
+          <div class="montserrat-normal-black-32px">Graph</div>
+          <div><canvas id="myChart" height="200"></canvas></div>
+          <!-- <img
               class="image-2"
               src="https://anima-uploads.s3.amazonaws.com/projects/627a3db91996a722f08bb46f/releases/627a3dc415efe47701a15528/img/image-2@2x.png"
             /> -->
-          </div>
-
-
-          
-
         </div>
+      </div>
     </div>
 
     <div class="watering-section" id="water-section">
-      <br>
+      <br />
       <div class="overlap-group1">
-
         <h1>Watering</h1>
-        <hr style="width: 50%;">
-      
-          <div class="overlap-group8">
+        <hr style="width: 50%" />
 
-            <div class="place-1 date-data">
-              <h2>Data</h2>
+        <div class="overlap-group8">
+          <div class="place-1 date-data">
+            <h2>Data</h2>
+            <p style="font-size: 15px; left: -38%; position: relative">
+              Date: <input type="text" id="datepicker" />
               <!-- Add Date-->
-              <div class="text-2">
-                <div class="row water-header-data">
-                  <div style="text-align: center;" class="col-md-4">Date</div>                  
-                  <div style="text-align: center;" class="col-md-2">Time</div>
-                  <div style="text-align: center;" class="col-md-2">Soil Moisture</div>
-                  <div style="text-align: center;" class="col-md-2">Temperature</div>
-                  <div style="text-align: center;" class="col-md-2">Humidity</div>
+            </p>
+
+            <div class="text-2">
+              <div class="row water-header-data">
+                <div style="text-align: center" class="col-md-4">Date</div>
+                <div style="text-align: center" class="col-md-2">Time</div>
+                <div style="text-align: center" class="col-md-2">
+                  Soil Moisture
                 </div>
-                <div style="display:block;height: 150px;overflow-y: auto;overflow-x: hidden;">
-                  <div class="row water-data" ng-repeat="item in waterData">
-                    <div style="text-align: center;" class="col-md-4">{{moment(item.time).format('ll')}}</div>                  
-                    <div style="text-align: center;" class="col-md-2">{{moment(item.time).format('HH:mm')}}</div>
-                    <div style="text-align: center;" class="col-md-2">{{round(item.soilHumidity)}}</div>
-                    <div style="text-align: center;" class="col-md-2">{{round(item.temperature)}}</div>
-                    <div style="text-align: center;" class="col-md-2">{{round(item.humidity)}}</div>
+                <div style="text-align: center" class="col-md-2">
+                  Temperature
+                </div>
+                <div style="text-align: center" class="col-md-2">Humidity</div>
+              </div>
+              <div
+                style="
+                  display: block;
+                  height: 150px;
+                  overflow-y: auto;
+                  overflow-x: hidden;
+                "
+              >
+                <div class="row water-data" ng-repeat="item in waterData">
+                  <div style="text-align: center" class="col-md-4">
+                    {{moment(item.time).format('ll')}}
+                  </div>
+                  <div style="text-align: center" class="col-md-2">
+                    {{moment(item.time).format('HH:mm')}}
+                  </div>
+                  <div style="text-align: center" class="col-md-2">
+                    {{round(item.soilHumidity)}}
+                  </div>
+                  <div style="text-align: center" class="col-md-2">
+                    {{round(item.temperature)}}
+                  </div>
+                  <div style="text-align: center" class="col-md-2">
+                    {{round(item.humidity)}}
                   </div>
                 </div>
-                <!-- 29/4/2022&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 10:00:00 -->
               </div>
-
+              <!-- 29/4/2022&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 10:00:00 -->
             </div>
-
-            <div class="overlap-group7 date-data">
-              <h2>Total Amount</h2>
-              <div class="number">{{waterData.length}}</div>
-            </div>
-            
-
           </div>
 
-
+          <div class="overlap-group7 date-data">
+            <h2>Total Amount</h2>
+            <div class="number">{{waterData.length}}</div>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="about-section" id="about-section">
       <div class="about">
         <h1>About us</h1>
-        <hr>
-        <p>Produced by เราจะรอดไปด้วยกัน</p>
+        <hr />
+        <div>
+          <p style="float: left">Produced by เราจะรอดไปด้วยกัน</p>
+          <p style="float: right">Member</p>
+        </div>
+        <div style="clear: both"></div>
+        <p style="float: right">Natnicha Coasol 6330159621</p>
+        <div style="clear: both"></div>
+        <p style="float: right">Nichakul Pichitwutikorn 6330180721</p>
+        <div style="clear: both"></div>
+        <p style="float: right">Thanachat Aimgosa 6330215021</p>
+        <div style="clear: both"></div>
+
+        <p style="float: right">Ponrawoot Khamkhanongngam 6330349521</p>
+        <div style="clear: both"></div>
       </div>
-      
-    </div>  
+    </div>
     <!-- <button>click</button>  -->
-    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
     <div id="myModal" class="modal fade" role="dialog">
       <div class="modal-dialog">
-    
         <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
             <h4 class="modal-title">Setting</h4>
           </div>
           <div class="modal-body">
             <!-- temperature -->
             <md-slider-container>
-              <span>Temperature <br>(C)</span>
-              <md-slider min="10" max="50" ng-model="setting.temperature" aria-label="red" id="red-slider"
-                        class="md-warn">
+              <span>Temperature <br />(C)</span>
+              <md-slider
+                min="10"
+                max="50"
+                ng-model="setting.temperature"
+                aria-label="red"
+                id="red-slider"
+                class="md-warn"
+              >
               </md-slider>
               <md-input-container>
-                <input type="number" ng-model="setting.temperature" aria-label="red" aria-controls="red-slider">
+                <input
+                  type="number"
+                  ng-model="setting.temperature"
+                  aria-label="red"
+                  aria-controls="red-slider"
+                />
               </md-input-container>
             </md-slider-container>
 
             <!-- humidity -->
             <md-slider-container>
-              <span>Humidity <br>(%)</span>
-              <md-slider min="10" max="60" ng-model="setting.humidity" aria-label="blue" id="blue-slider"
-                        class="md-warn">
+              <span>Humidity <br />(%)</span>
+              <md-slider
+                min="10"
+                max="60"
+                ng-model="setting.humidity"
+                aria-label="blue"
+                id="blue-slider"
+                class="md-warn"
+              >
               </md-slider>
               <md-input-container>
-                <input type="number" ng-model="setting.humidity" aria-label="blue" aria-controls="blue-slider">
+                <input
+                  type="number"
+                  ng-model="setting.humidity"
+                  aria-label="blue"
+                  aria-controls="blue-slider"
+                />
               </md-input-container>
             </md-slider-container>
 
             <!-- soil -->
             <md-slider-container>
-              <span>Soil-moisture <br>(%)</span>
-              <md-slider min="10" max="90" ng-model="setting.soilHumidity" aria-label="red" id="red-slider"
-                        class="md-warn">
+              <span>Soil-moisture <br />(%)</span>
+              <md-slider
+                min="10"
+                max="90"
+                ng-model="setting.soilHumidity"
+                aria-label="red"
+                id="red-slider"
+                class="md-warn"
+              >
               </md-slider>
               <md-input-container>
-                <input type="number" ng-model="setting.soilHumidity" aria-label="red" aria-controls="red-slider">
+                <input
+                  type="number"
+                  ng-model="setting.soilHumidity"
+                  aria-label="red"
+                  aria-controls="red-slider"
+                />
               </md-input-container>
             </md-slider-container>
 
             <!-- water timer -->
             <md-slider-container>
-              <span>Water-timer <br>(sec)</span>
-              <md-slider min="3" max="20" ng-model="setting.waterTimer" aria-label="red" id="red-slider"
-                        class="md-warn">
+              <span>Water-timer <br />(sec)</span>
+              <md-slider
+                min="3"
+                max="20"
+                ng-model="setting.waterTimer"
+                aria-label="red"
+                id="red-slider"
+                class="md-warn"
+              >
               </md-slider>
               <md-input-container>
-                <input type="number" ng-model="setting.waterTimer" aria-label="red" aria-controls="red-slider">
+                <input
+                  type="number"
+                  ng-model="setting.waterTimer"
+                  aria-label="red"
+                  aria-controls="red-slider"
+                />
               </md-input-container>
             </md-slider-container>
 
             <!-- do every -->
             <md-slider-container>
-              <span>Intervals <br>(min)</span>
-              <md-slider min="1" max="180" ng-model="setting.doEvery" aria-label="red" id="red-slider"
-                        class="md-warn">
+              <span>Intervals <br />(min)</span>
+              <md-slider
+                min="1"
+                max="180"
+                ng-model="setting.doEvery"
+                aria-label="red"
+                id="red-slider"
+                class="md-warn"
+              >
               </md-slider>
               <md-input-container>
-                <input type="number" ng-model="setting.doEvery" aria-label="red" aria-controls="red-slider">
+                <input
+                  type="number"
+                  ng-model="setting.doEvery"
+                  aria-label="red"
+                  aria-controls="red-slider"
+                />
               </md-input-container>
             </md-slider-container>
 
@@ -282,178 +411,175 @@
             <md-switch ng-model="setting.powerSaving" aria-label="Switch 1">
               power saving mode
             </md-switch>
-
-
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveSetting();">save change</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-dismiss="modal"
+              ng-click="saveSetting();"
+            >
+              save change
+            </button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              Close
+            </button>
           </div>
         </div>
-    
       </div>
     </div>
-    <p>Date: <input type="text" id="datepicker"></p>
-    <div  ng-cloak="" >
-      <md-slider-container>
-        <span>R</span>
-        <md-slider min="0" max="255" ng-model="color.red" aria-label="red" class="md-warn">
-        </md-slider>
-        <md-input-container>
-          <input type="number" ng-model="color.red" aria-label="red" aria-controls="red-slider">
-        </md-input-container>
-      </md-slider-container>
-    </div>
-    
 
-    
-    
-
-
-    <script type="module" src ="index.js"></script>
+    <script type="module" src="index.js"></script>
     <script>
       var ret;
-      $(document).ready(function(){
-        $("button").click(function(){
-          ret = $.getJSON("https://iz1mjkeoql.execute-api.us-west-1.amazonaws.com/stage/getData?id=Naotest8&from=2022-5-26")
+      $(document).ready(function () {
+        $("button").click(function () {
+          ret = $.getJSON(
+            "https://iz1mjkeoql.execute-api.us-west-1.amazonaws.com/stage/getData?id=Naotest8&from=2022-5-26"
+          );
           console.log(ret);
         });
       });
     </script>
+    <script></script>
+
     <script>
-     
-    </script>
-
-
-
-<script>
-  async function uploadS3(data){
-    const result = await $.ajax({
-        url: 'https://iotdevicecfg.s3.ap-southeast-1.amazonaws.com/iotdevicecfg.json',
-        type: 'PUT',
-        data: JSON.stringify(data),
-    });
-    return result;
-}
-
-async function loadFromS3(){
-    const result = await $.ajax({
-        url: 'https://iotdevicecfg.s3.ap-southeast-1.amazonaws.com/iotdevicecfg.json',
-        type: 'GET',
-    });
-    return JSON.parse(result);
-}
-angular.module('MyApp', ['ngMaterial'])
-.controller('myControl', function($scope) {
-    $scope.setting = {
-      temperature: 0.0,
-      soilHumidity: 0,
-      humidity: 0,
-      waterTimer: 0,
-      doEvery: 0,
-      powerSaving:false,
-      
-    }
-    $scope.log = function(){
-      console.log("setting",$scope.setting);
-    }
-    $scope.temperature = "";
-    $scope.humidity = "";
-    $scope.light = "";
-    $scope.soilHumidity = "";
-    $scope.changeTenp = function(dir){
-      if(dir == "up"){
-        $scope.temperature += 1.0;
-      }else{
-        $scope.temperature -= 1.0;
+      async function uploadS3(data) {
+        const result = await $.ajax({
+          url: "https://iotdevicecfg.s3.ap-southeast-1.amazonaws.com/iotdevicecfg.json",
+          type: "PUT",
+          data: JSON.stringify(data),
+        });
+        return result;
       }
-    }
-    $scope.save = function(){
-        var obj = {
-          Temperature: $scope.temperature,
-          humidity:  $scope.humidity,
-        }
-        console.log("save",obj);
-    }
-    $scope.round = function(num){
-        return Math.round((num + Number.EPSILON) * 100) / 100
-    }
-    
-    $scope.hourData = function(data){
-        var ret = [];
-        for(var i=0;i<24;i++){
-            ret.push({
-              label: i,
-              humidity: 0,
-              temperature: 0,
-              light: 0,
-              soilHumidity:0,
-              count: 0,
-            });
-        }
-        for(var i=0;i<data.length;i++){
-            var d = data[i];
-            var local = moment.utc(d.time).local();
-            var hour = local.hour();
-            var prev = {... ret[hour]};
-            var avg = {
-              label: prev.label,
-              humidity:$scope.round( (d.humidity + (prev.humidity * prev.count))/(prev.count + 1)),
-              temperature:$scope.round( (d.temperature + (prev.temperature * prev.count))/(prev.count + 1)),
-              light:$scope.round( (d.light + (prev.light * prev.count))/(prev.count + 1)),
-              soilHumidity:$scope.round( (d.soilHumidity + (prev.soilHumidity * prev.count))/(prev.count + 1)),
-              count: prev.count + 1,
+
+      async function loadFromS3() {
+        const result = await $.ajax({
+          url: "https://iotdevicecfg.s3.ap-southeast-1.amazonaws.com/iotdevicecfg.json",
+          type: "GET",
+        });
+        return JSON.parse(result);
+      }
+      angular
+        .module("MyApp", ["ngMaterial"])
+        .controller("myControl", function ($scope) {
+          $scope.setting = {
+            temperature: 0.0,
+            soilHumidity: 0,
+            humidity: 0,
+            waterTimer: 0,
+            doEvery: 0,
+            powerSaving: false,
+          };
+          $scope.log = function () {
+            console.log("setting", $scope.setting);
+          };
+          $scope.temperature = "";
+          $scope.humidity = "";
+          $scope.light = "";
+          $scope.soilHumidity = "";
+          $scope.changeTenp = function (dir) {
+            if (dir == "up") {
+              $scope.temperature += 1.0;
+            } else {
+              $scope.temperature -= 1.0;
             }
-            ret[hour] = avg;
-            console.log(local.format(),local.format("HH"));
-        }
-        console.log(ret);
-        return ret;
-    }
-    $scope.saveSetting = async function(){
-      var s ="";
-      s+=$scope.setting.temperature;
-      s+=" "+ $scope.setting.soilHumidity;
-      s+=" "+ $scope.setting.humidity;
-      s+=" "+ $scope.setting.waterTimer;
-      s+=" "+ $scope.setting.doEvery;
-      if($scope.setting.powerSaving){
-        s+=" 1";
-      }
-      else{
-        s+=" 0";
-      }
-     
-      console.log("savesetting",s);
-      await uploadS3(s);
-      var setting = await loadFromS3();
-      console.log(setting);
-    }
-    $scope.loadSetting = async function(){
-      var x = await loadFromS3();
-      var s = x.split(" ");
-      $scope.setting.temperature = parseFloat(s[0]);
-      $scope.setting.soilHumidity = parseFloat(s[1]);
-      $scope.setting.humidity = parseFloat(s[2]);
-      $scope.setting.waterTimer = parseInt(s[3]);
-      $scope.setting.doEvery = parseInt(s[4]);
-      $scope.setting.powerSaving = parseInt(s[5])==1;
+          };
+          $scope.save = function () {
+            var obj = {
+              Temperature: $scope.temperature,
+              humidity: $scope.humidity,
+            };
+            console.log("save", obj);
+          };
+          $scope.round = function (num) {
+            return Math.round((num + Number.EPSILON) * 100) / 100;
+          };
 
-      // var s ="";
-      // s+=$scope.setting.temperature;
-      // s+=" "+ $scope.setting.soilHumidity;
-      // s+=" "+ $scope.setting.humidity;
-      // s+=" "+ $scope.setting.waterTimer;
-      // s+=" "+ $scope.setting.doEvery;
-      // console.log("savesetting",s);
-      // await uploadS3(s);
-      // var setting = await loadFromS3();
-      console.log("load setting",  $scope.setting);
-    }
+          $scope.hourData = function (data) {
+            var ret = [];
+            for (var i = 0; i < 24; i++) {
+              ret.push({
+                label: i,
+                humidity: 0,
+                temperature: 0,
+                light: 0,
+                soilHumidity: 0,
+                count: 0,
+              });
+            }
+            for (var i = 0; i < data.length; i++) {
+              var d = data[i];
+              var local = moment.utc(d.time).local();
+              var hour = local.hour();
+              var prev = { ...ret[hour] };
+              var avg = {
+                label: prev.label,
+                humidity: $scope.round(
+                  (d.humidity + prev.humidity * prev.count) / (prev.count + 1)
+                ),
+                temperature: $scope.round(
+                  (d.temperature + prev.temperature * prev.count) /
+                    (prev.count + 1)
+                ),
+                light: $scope.round(
+                  (d.light + prev.light * prev.count) / (prev.count + 1)
+                ),
+                soilHumidity: $scope.round(
+                  (d.soilHumidity + prev.soilHumidity * prev.count) /
+                    (prev.count + 1)
+                ),
+                count: prev.count + 1,
+              };
+              ret[hour] = avg;
+              console.log(local.format(), local.format("HH"));
+            }
+            console.log(ret);
+            return ret;
+          };
+          $scope.saveSetting = async function () {
+            var s = "";
+            s += $scope.setting.temperature;
+            s += " " + $scope.setting.soilHumidity;
+            s += " " + $scope.setting.humidity;
+            s += " " + $scope.setting.waterTimer;
+            s += " " + $scope.setting.doEvery;
+            if ($scope.setting.powerSaving) {
+              s += " 1";
+            } else {
+              s += " 0";
+            }
 
-    // $scope.saveSetting();
-    
-    /*$scope.loadData = async function(){
+            console.log("savesetting", s);
+            await uploadS3(s);
+            var setting = await loadFromS3();
+            console.log(setting);
+          };
+          $scope.loadSetting = async function () {
+            var x = await loadFromS3();
+            var s = x.split(" ");
+            $scope.setting.temperature = parseFloat(s[0]);
+            $scope.setting.soilHumidity = parseFloat(s[1]);
+            $scope.setting.humidity = parseFloat(s[2]);
+            $scope.setting.waterTimer = parseInt(s[3]);
+            $scope.setting.doEvery = parseInt(s[4]);
+            $scope.setting.powerSaving = parseInt(s[5]) == 1;
+
+            // var s ="";
+            // s+=$scope.setting.temperature;
+            // s+=" "+ $scope.setting.soilHumidity;
+            // s+=" "+ $scope.setting.humidity;
+            // s+=" "+ $scope.setting.waterTimer;
+            // s+=" "+ $scope.setting.doEvery;
+            // console.log("savesetting",s);
+            // await uploadS3(s);
+            // var setting = await loadFromS3();
+            console.log("load setting", $scope.setting);
+          };
+
+          // $scope.saveSetting();
+
+          /*$scope.loadData = async function(){
 
         var ret = await getAllData("Naotest8",moment().format("YYYY-M-D"));
         if( ret.length == 0){
@@ -486,180 +612,182 @@ angular.module('MyApp', ['ngMaterial'])
             $scope.createChart(hourData);
         });
     }*/
-    $scope.loadData = async function(){
-        await $scope.loadSetting();
-        var ret = await getAllData($scope.id,$scope.selectedDate);
-        $scope.rawData = ret;
-        ret = ret.sort(function(x, y){
-            return x.time.seconds - y.time.seconds;
-        })
+          $scope.loadData = async function () {
+            await $scope.loadSetting();
+            var ret = await getAllData($scope.id, $scope.selectedDate);
+            $scope.rawData = ret;
+            ret = ret.sort(function (x, y) {
+              return x.time.seconds - y.time.seconds;
+            });
 
-        console.log("raw data",ret);
-        var clean = [];
-        for(var i = 0;i< ret.length;i++){
-          if(ret[i].temperature >10.0 && ret[i].temperature != "NaN" ){
-            clean.push(ret[i]);
-          }
-        }
-        ret = clean;
-        console.log("cleandata",ret);
-
-        var hourData = $scope.hourData(ret);
-
-        $scope.$apply(function () {
-            if(ret.length > 0){
-              var last = ret[ret.length -1];
-              console.log("loadData",last);
-              $scope.temperature = last.temperature;
-              $scope.humidity = $scope.round(last.humidity);
-              $scope.light = last.light;
-              $scope.soilHumidity = last.soilHumidity;
-              
-            }else{
-              $scope.temperature = null;
-              $scope.humidity = null;
-              $scope.light = null;
-              $scope.soilHumidity = null;
+            console.log("raw data", ret);
+            var clean = [];
+            for (var i = 0; i < ret.length; i++) {
+              if (ret[i].temperature > 10.0 && ret[i].temperature != "NaN") {
+                clean.push(ret[i]);
+              }
             }
-            $scope.gauge.refresh($scope.soilHumidity);
-            $scope.createChart(hourData);            
-        });
-        $scope.loadWaterData();
-        
-    }
-    $scope.moment = moment;
-    /*$scope.loadWaterData = async function(){
+            ret = clean;
+            console.log("cleandata", ret);
+
+            var hourData = $scope.hourData(ret);
+
+            $scope.$apply(function () {
+              if (ret.length > 0) {
+                var last = ret[ret.length - 1];
+                console.log("loadData", last);
+                $scope.temperature = last.temperature;
+                $scope.humidity = $scope.round(last.humidity);
+                $scope.light = last.light;
+                $scope.soilHumidity = last.soilHumidity;
+              } else {
+                $scope.temperature = null;
+                $scope.humidity = null;
+                $scope.light = null;
+                $scope.soilHumidity = null;
+              }
+              $scope.gauge.refresh($scope.soilHumidity);
+              $scope.createChart(hourData);
+            });
+            $scope.loadWaterData();
+          };
+          $scope.moment = moment;
+          /*$scope.loadWaterData = async function(){
         var ret = await getAllWaterDataByDate("Naotest8",moment().format("YYYY-M-D"));
         console.log("loadWaterData",ret);
         $scope.$apply(function () {
           $scope.waterData = ret;
         });
     }*/
-    $scope.loadWaterData = async function(){
-        var ret = await getAllWaterDataByDate($scope.rawData);
-        console.log("loadWaterData",ret);
-        $scope.$apply(function () {
-          $scope.waterData = ret;
-        });
-    }
-    $scope.pushIfValid = function(value,list){
-      if(value != 0){
-        list.push(value);
-      }
-      else{
-        list.push(null);
-      }
-    }
-    $scope.myChart = null;
-    $scope.createChart = function(data){
-      var labels = [];
-      var temperature = [];
-      var soilHumidity = [];
-      var humidity = [];
-      var light = [];
-      for(var i=0;i<data.length;i++){
-          labels.push(data[i].label);
-          // temperature.push(data[i].temperature);
-          // humidity.push(data[i].humidity);
-          // soilHumidity.push(data[i].soilHumidity/100);
-          // light.push(data[i].light);
-          $scope.pushIfValid(data[i].temperature,temperature);
-          $scope.pushIfValid(data[i].humidity,humidity);
-          $scope.pushIfValid(data[i].soilHumidity,soilHumidity);
-          $scope.pushIfValid(data[i].light,light);
-      }
-      console.log(temperature,labels);
-      var datasets = [
+          $scope.loadWaterData = async function () {
+            var ret = await getAllWaterDataByDate($scope.rawData);
+            console.log("loadWaterData", ret);
+            $scope.$apply(function () {
+              $scope.waterData = ret;
+            });
+          };
+          $scope.pushIfValid = function (value, list) {
+            if (value != 0) {
+              list.push(value);
+            } else {
+              list.push(null);
+            }
+          };
+          $scope.myChart = null;
+          $scope.createChart = function (data) {
+            var labels = [];
+            var temperature = [];
+            var soilHumidity = [];
+            var humidity = [];
+            var light = [];
+            for (var i = 0; i < data.length; i++) {
+              labels.push(data[i].label);
+              // temperature.push(data[i].temperature);
+              // humidity.push(data[i].humidity);
+              // soilHumidity.push(data[i].soilHumidity/100);
+              // light.push(data[i].light);
+              $scope.pushIfValid(data[i].temperature, temperature);
+              $scope.pushIfValid(data[i].humidity, humidity);
+              $scope.pushIfValid(data[i].soilHumidity, soilHumidity);
+              $scope.pushIfValid(data[i].light, light);
+            }
+            console.log(temperature, labels);
+            var datasets = [
               {
-                label: 'Temperature',
+                label: "Temperature",
                 data: temperature,
-                borderColor: 'black',
-                backgroundColor: 'white',
+                borderColor: "black",
+                backgroundColor: "white",
                 borderWidth: 1,
               },
               {
-                label: 'Soil-Moisture',
+                label: "Soil-Moisture",
                 data: soilHumidity,
-                borderColor: 'brown',
-                backgroundColor: 'brown',
+                borderColor: "brown",
+                backgroundColor: "brown",
                 borderWidth: 1,
               },
               {
-                label: 'Humidity',
+                label: "Humidity",
                 data: humidity,
-                borderColor: 'green',
-                backgroundColor: 'green',
+                borderColor: "green",
+                backgroundColor: "green",
                 borderWidth: 1,
               },
-      ];
-      if($scope.myChart !=null){
-        for(var i = 0;i<temperature.length;i++){
-          $scope.myChart.data.datasets[0].data[i] = temperature[i];
-          $scope.myChart.data.datasets[1].data[i] = soilHumidity[i];
-          $scope.myChart.data.datasets[2].data[i] = humidity[i];
-        }
-        $scope.myChart.update();
-      }else{
-        const ctx = document.getElementById('myChart').getContext('2d');
-        $scope.myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: datasets,
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                }
+            ];
+            if ($scope.myChart != null) {
+              for (var i = 0; i < temperature.length; i++) {
+                $scope.myChart.data.datasets[0].data[i] = temperature[i];
+                $scope.myChart.data.datasets[1].data[i] = soilHumidity[i];
+                $scope.myChart.data.datasets[2].data[i] = humidity[i];
+              }
+              $scope.myChart.update();
+            } else {
+              const ctx = document.getElementById("myChart").getContext("2d");
+              $scope.myChart = new Chart(ctx, {
+                type: "line",
+                data: {
+                  labels: labels,
+                  datasets: datasets,
+                },
+                options: {
+                  scales: {
+                    y: {
+                      beginAtZero: true,
+                    },
+                  },
+                },
+              });
+            }
+          };
+          $scope.gauge = new JustGage({
+            id: "gauge", // the id of the html element
+            value: 0,
+            min: 0,
+            max: 100,
+            decimals: 2,
+            color: "#fff000",
+            gaugeWidthScale: 0.6,
+            dialStartAngle: 180,
+            dialEndAngle: 0,
+            labelFontColor: "black",
+            levelColors: ["#ff0000", "#3CB043"],
+            // customSectors : [{"lo":0,"hi":10,"color":"#a9d70b"},
+            //            {"lo":11,"hi":22,"color":"#f9c802"},
+            //            {"lo":23,"hi":34,"color":"#ff0000"}],
+          });
+
+          $("#datepicker").datepicker({
+            onSelect: function (dateText) {
+              console.log(
+                "Selected date: " +
+                  dateText +
+                  "; input's current value: " +
+                  this.value
+              );
+              $scope.$apply(function () {
+                $scope.changedate();
+              });
             },
-        }
-        });      
-      }
-    }
-    $scope.gauge = new JustGage({
-        id: "gauge", // the id of the html element
-        value: 0,
-        min: 0,
-        max: 100,
-        decimals: 2,
-        color : "#fff000",
-        gaugeWidthScale: 0.6,
-        dialStartAngle: 180,
-        dialEndAngle: 0,
-        labelFontColor: 'black',
-        levelColors: ["#ff0000", "#3CB043"],
-        // customSectors : [{"lo":0,"hi":10,"color":"#a9d70b"},
-        //            {"lo":11,"hi":22,"color":"#f9c802"},
-        //            {"lo":23,"hi":34,"color":"#ff0000"}],
-    });
-
-    $( "#datepicker" ).datepicker({
-      onSelect: function(dateText) {
-        console.log("Selected date: " + dateText + "; input's current value: " + this.value);
-        $scope.$apply(function () {
-          $scope.changedate();
+          });
+          $scope.id = "Naotest8";
+          $scope.selectedDate = moment().format("YYYY-M-D");
+          $scope.changedate = function (days) {
+            if (days == null) {
+              var x = $("#datepicker").val().split("/");
+              $scope.selectedDate = [x[2], x[0], x[1]].join("-");
+            } else {
+              $scope.selectedDate = moment($scope.selectedDate)
+                .add(days, "days")
+                .format("YYYY-M-D");
+            }
+            $scope.loadData();
+            //$scope.loadWaterData();
+          };
+          // load today data
+          $scope.loadData();
+          //$scope.loadWaterData();
         });
-      }
-    });
-    $scope.id = "Naotest8";
-    $scope.selectedDate = moment().format("YYYY-M-D");
-    $scope.changedate = function(days){
-        if(days == null){
-          var x = $('#datepicker').val().split('/');
-          $scope.selectedDate = [x[2],x[0],x[1]].join('-');
-        }else{
-          $scope.selectedDate = moment($scope.selectedDate).add(days, 'days').format("YYYY-M-D");
-        }
-        $scope.loadData();
-        //$scope.loadWaterData();
-    }
-    // load today data
-    $scope.loadData();
-    //$scope.loadWaterData();
-});      
-
-
     </script>
   </body>
 </html>

@@ -131,6 +131,9 @@ div.water-header-data {
 
 .gauge{
     height: 250;
+    margin-top: 30px;
+    align-items: center;
+    
 }
 
 .left-data{
@@ -290,16 +293,6 @@ md-slider-container>:first-child:not(md-slider) {
         padding-top: 0px;
     }
 
-    .place-1{
-        width: auto;
-    }
-
-    .gauge{
-        margin-top: 30px;
-        height: auto;
-        align-items: center;
-    }
-
     .data{
         min-height: 150px;
         margin-left: 0;
@@ -429,10 +422,6 @@ md-slider-container>:first-child:not(md-slider) {
     .overlap-group8{
         margin: 0;
         padding: 0;
-    }
-
-    .gauge{
-        height: auto;
     }
 
     div.water-header-data {
