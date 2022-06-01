@@ -228,7 +228,7 @@ md-switch.md-default-theme.md-checked:not([disabled]) .md-bar, md-switch.md-chec
 }
 
 md-slider-container>:first-child:not(md-slider) {
-    min-width: 100px;
+    min-width: 8px;
     /* max-width: 41px;
     height: 25px;
     transition: all .4s cubic-bezier(.25,.8,.25,1);
@@ -240,6 +240,9 @@ md-slider-container>:first-child:not(md-slider) {
         margin: 30px auto;
     }
 }
+/* md-slider-container>:first-child:not(md-slider) {
+    margin-right: 8px;
+} */
 
 
 
