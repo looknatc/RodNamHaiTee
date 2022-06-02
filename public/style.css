@@ -234,6 +234,19 @@ md-slider-container>:first-child:not(md-slider) {
     transition: all .4s cubic-bezier(.25,.8,.25,1);
     transition-property: color,max-width; */
 }
+
+.setting-title {
+    min-width: 100px;
+}
+
+md-slider-container>:last-child:not(md-slider) {
+    min-width: 68px !important; 
+    max-width: 68px !important; 
+    height: 25px;
+    transition: all .4s cubic-bezier(.25,.8,.25,1);
+    transition-property: color,max-width;
+}
+
 @media (min-width: 768px){
     .modal-dialog {
         width: 731px;

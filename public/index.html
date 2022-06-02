@@ -121,6 +121,7 @@
           <!-- <li><a href="">+</a></li> -->
           <!-- type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" -->
           <button
+            ng-click="openSetting()"
             type="button"
             class="material-icon"
             style="margin-left: 40"
@@ -159,6 +160,7 @@
               <span ng-click="changedate(1)" class="material-symbols-outlined">
                 chevron_right
               </span>
+              
             </button>
           </div>
         </div>
@@ -212,8 +214,8 @@
             <h2>Data</h2>
             <p style="font-size: 15px; left: -38%; position: relative">
               Date: <input type="text" id="datepicker" />
-              <!-- Add Date-->
-            </p>
+              <!-- Add date -->
+            </p> 
 
             <div class="text-2">
               <div class="row water-header-data">
@@ -298,7 +300,10 @@
           <div class="modal-body">
             <!-- temperature -->
             <md-slider-container>
-              <span>Temperature <br />(C)</span>
+              <span class="material-symbols-outlined">
+                device_thermostat
+              </span>
+              <span class="setting-title">Temperature <br />(C)</span>
               <md-slider
                 min="10"
                 max="50"
@@ -308,7 +313,7 @@
                 class="md-warn"
               >
               </md-slider>
-              <md-input-container>
+              <md-input-container class="setting-value">
                 <input
                   type="number"
                   ng-model="setting.temperature"
@@ -320,7 +325,10 @@
 
             <!-- humidity -->
             <md-slider-container>
-              <span>Humidity <br />(%)</span>
+              <span class="material-symbols-outlined">
+                humidity_mid
+              </span>
+              <span class="setting-title">Humidity <br />(%)</span>
               <md-slider
                 min="10"
                 max="60"
@@ -330,7 +338,7 @@
                 class="md-warn"
               >
               </md-slider>
-              <md-input-container>
+              <md-input-container class="setting-value">
                 <input
                   type="number"
                   ng-model="setting.humidity"
@@ -342,7 +350,10 @@
 
             <!-- soil -->
             <md-slider-container>
-              <span>Soil-moisture <br />(%)</span>
+              <span class="material-symbols-outlined">
+                local_drink
+              </span>
+              <span class="setting-title">Soil-moisture <br />(%)</span>
               <md-slider
                 min="10"
                 max="90"
@@ -352,7 +363,7 @@
                 class="md-warn"
               >
               </md-slider>
-              <md-input-container>
+              <md-input-container class="setting-value">
                 <input
                   type="number"
                   ng-model="setting.soilHumidity"
@@ -364,7 +375,10 @@
 
             <!-- water timer -->
             <md-slider-container>
-              <span>Water-timer <br />(sec)</span>
+              <span class="material-symbols-outlined">
+                shower
+              </span>
+              <span class="setting-title">Water-timer <br />(sec)</span>
               <md-slider
                 min="3"
                 max="20"
@@ -374,7 +388,7 @@
                 class="md-warn"
               >
               </md-slider>
-              <md-input-container>
+              <md-input-container class="setting-value">
                 <input
                   type="number"
                   ng-model="setting.waterTimer"
@@ -386,7 +400,10 @@
 
             <!-- do every -->
             <md-slider-container>
-              <span>Intervals <br />(min)</span>
+              <span class="material-symbols-outlined">
+                timer
+              </span>
+              <span class="setting-title"> Intervals <br />(min)</span>
               <md-slider
                 min="1"
                 max="180"
@@ -396,7 +413,7 @@
                 class="md-warn"
               >
               </md-slider>
-              <md-input-container>
+              <md-input-container class="setting-value">
                 <input
                   type="number"
                   ng-model="setting.doEvery"
@@ -413,6 +430,7 @@
           </div>
           <div class="modal-footer">
             <button
+              ng-show="isSettingChange()"
               type="button"
               class="btn btn-primary"
               data-dismiss="modal"
@@ -550,10 +568,20 @@
             }
 
             console.log("savesetting", s);
+            $scope.orgSetting = {... $scope.setting};
             await uploadS3(s);
-            var setting = await loadFromS3();
-            console.log(setting);
+            
+            //var setting = await loadFromS3();
+            //console.log(setting);
           };
+          $scope.openSetting = function(){
+            $scope.setting = {... $scope.orgSetting};
+          }
+
+          $scope.isSettingChange = function(){
+              return JSON.stringify($scope.setting) != JSON.stringify($scope.orgSetting)
+          }
+          
           $scope.loadSetting = async function () {
             var x = await loadFromS3();
             var s = x.split(" ");
@@ -563,6 +591,8 @@
             $scope.setting.waterTimer = parseInt(s[3]);
             $scope.setting.doEvery = parseInt(s[4]);
             $scope.setting.powerSaving = parseInt(s[5]) == 1;
+
+            $scope.orgSetting = {... $scope.setting};
 
             // var s ="";
             // s+=$scope.setting.temperature;
